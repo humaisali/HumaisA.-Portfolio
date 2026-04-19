@@ -50,7 +50,7 @@ export default function Navbar() {
 
         <motion.a href="#" whileHover={{ scale: 1.02 }} className="relative group">
           <span className="text-2xl font-black tracking-tight text-white">
-            HumaisA<span className="text-[#0A84FF]">.</span>
+            Humais.Softneer<span className="text-[#0A84FF]">.</span>
           </span>
         </motion.a>
 

@@ -22,10 +22,10 @@ export default function Footer() {
   var year = new Date().getFullYear();
   return (
     <footer className="relative z-10 border-t border-[#30363D]/50 pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid md:grid-cols-3 gap-10 mb-12">
+      <div className="px-6 mx-auto max-w-7xl lg:px-12">
+        <div className="grid gap-10 mb-12 md:grid-cols-3">
           <div>
-            <a href="#" className="text-3xl font-black text-white">HA<span className="text-[#0A84FF]">.</span></a>
+            <a href="#" className="text-3xl font-black text-white">Humais.Softneer<span className="text-[#0A84FF]">.</span></a>
             <p className="text-[#8B949E] text-sm mt-3 leading-relaxed max-w-xs">
               Full Stack Developer & AI Engineer based in Mardan, Pakistan.
             </p>
@@ -43,7 +43,7 @@ export default function Footer() {
             </div>
           </div>
           <div>
-            <p className="text-white font-semibold text-sm uppercase tracking-widest font-mono mb-4">Navigation</p>
+            <p className="mb-4 font-mono text-sm font-semibold tracking-widest text-white uppercase">Navigation</p>
             <ul className="flex flex-col gap-3">
               {links.map(function(link) {
                 return (
@@ -57,15 +57,15 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <p className="text-white font-semibold text-sm uppercase tracking-widest font-mono mb-4">Contact</p>
+            <p className="mb-4 font-mono text-sm font-semibold tracking-widest text-white uppercase">Contact</p>
             <div className="flex flex-col gap-3">
               <a href={"mailto:" + personalInfo.email} className="text-[#8B949E] hover:text-[#0A84FF] text-sm transition-colors duration-200 font-mono">
                 {personalInfo.email}
               </a>
               <p className="text-[#8B949E] text-sm">{personalInfo.location}</p>
               <div className="flex items-center gap-2 mt-1">
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="text-green-400 text-xs font-mono">Available for work</span>
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                <span className="font-mono text-xs text-green-400">Available for work</span>
               </div>
             </div>
           </div>
