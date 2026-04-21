@@ -22,16 +22,25 @@ export default function Navbar() {
   }, []);
 
   useEffect(function() {
+    // Use a lower threshold + rootMargin so projects section
+    // gets detected even though it's a tall grid section
     var observer = new IntersectionObserver(
       function(entries) {
-        entries.forEach(function(e) { if (e.isIntersecting) setActive(e.target.id); });
+        entries.forEach(function(e) {
+          if (e.isIntersecting) setActive(e.target.id);
+        });
       },
-      { threshold: 0.4 }
+      {
+        threshold: 0.15,
+        rootMargin: "-80px 0px -40% 0px",
+      }
     );
+
     LINKS.forEach(function(l) {
       var el = document.getElementById(l.href.replace("#", ""));
       if (el) observer.observe(el);
     });
+
     return function() { observer.disconnect(); };
   }, []);
 
@@ -46,15 +55,15 @@ export default function Navbar() {
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={"fixed top-0 left-0 right-0 z-[100] transition-all duration-500 " + navBg}
     >
-      <div className="flex items-center justify-between px-6 py-5 mx-auto max-w-7xl lg:px-12">
+      <div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 mx-auto max-w-7xl lg:px-12">
 
-        <motion.a href="#" whileHover={{ scale: 1.02 }} className="relative group">
-          <span className="text-2xl font-black tracking-tight text-white">
+        <motion.a href="#" whileHover={{ scale: 1.02 }} className="relative group flex-shrink-0">
+          <span className="text-xl sm:text-2xl font-black tracking-tight text-white">
             Humais.Softneer<span className="text-[#0A84FF]">.</span>
           </span>
         </motion.a>
 
-        <ul className="items-center hidden gap-10 md:flex">
+        <ul className="items-center hidden gap-8 xl:gap-10 md:flex">
           {LINKS.map(function(link, i) {
             var isActive = active === link.href.replace("#", "");
             return (
@@ -82,18 +91,19 @@ export default function Navbar() {
           })}
         </ul>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="hidden md:flex items-center gap-2 px-5 py-2 rounded-md bg-[#0A84FF] text-white text-sm font-semibold hover:bg-[#0066CC] transition-colors duration-200"
+            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-md bg-[#0A84FF] text-white text-sm font-semibold hover:bg-[#0066CC] transition-colors duration-200"
           >
             Hire Me
           </motion.a>
           <button
-            className="md:hidden text-[#8B949E] hover:text-white transition-colors"
+            className="md:hidden text-[#8B949E] hover:text-white transition-colors p-1"
             onClick={function() { setOpen(function(p) { return !p; }); }}
+            aria-label="Toggle menu"
           >
             {open ? <FiX size={22} /> : <FiMenu size={22} />}
           </button>
@@ -106,27 +116,29 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-[#30363D]/50 px-6 py-6"
+            className="md:hidden glass border-t border-[#30363D]/50 px-6 py-5 overflow-hidden"
           >
-            <ul className="flex flex-col gap-5">
+            <ul className="flex flex-col gap-4">
               {LINKS.map(function(link) {
+                var isActive = active === link.href.replace("#", "");
                 return (
                   <li key={link.href}>
                     <a
                       href={link.href}
                       onClick={function() { setOpen(false); }}
-                      className="text-[#8B949E] hover:text-white text-base font-medium transition-colors"
+                      className={"text-base font-medium transition-colors " +
+                        (isActive ? "text-[#0A84FF]" : "text-[#8B949E] hover:text-white")}
                     >
                       {link.label}
                     </a>
                   </li>
                 );
               })}
-              <li>
+              <li className="pt-1">
                 <a
                   href="#contact"
                   onClick={function() { setOpen(false); }}
-                  className="inline-block px-5 py-2 bg-[#0A84FF] text-white rounded-md text-sm font-semibold"
+                  className="inline-block px-5 py-2.5 bg-[#0A84FF] text-white rounded-md text-sm font-semibold hover:bg-[#0066CC] transition-colors"
                 >
                   Hire Me
                 </a>

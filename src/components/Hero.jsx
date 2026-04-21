@@ -44,8 +44,10 @@ export default function Hero() {
   var letters = "HUMAIS ALI".split("");
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
-
+    <section
+      id="hero"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 pb-16"
+    >
       {/* Mesh gradient bg */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#0A84FF] rounded-full opacity-[0.04] blur-[120px]" />
@@ -61,7 +63,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 text-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center w-full">
 
         {/* Name — staggered letters */}
         <div className="flex items-center justify-center flex-wrap gap-0 mb-4 overflow-hidden">
@@ -72,7 +74,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 80, rotateX: -90 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[clamp(3rem,10vw,7rem)] font-black leading-none tracking-tighter text-white"
+                className="text-[clamp(2.4rem,9vw,7rem)] font-black leading-none tracking-tighter text-white"
                 style={{ display: "inline-block" }}
               >
                 {letter === " " ? "\u00A0" : letter}
@@ -86,13 +88,13 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-2xl md:text-3xl font-light text-[#8B949E] mb-3 h-10"
+          className="text-xl sm:text-2xl md:text-3xl font-light text-[#8B949E] mb-3 h-10"
         >
           <span className="text-[#00D4FF] font-mono font-medium">{text}</span>
           <span className="blink text-[#0A84FF] ml-0.5">|</span>
         </motion.div>
 
-        {/* Available badge — sits naturally below role */}
+        {/* Available badge */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,7 +103,7 @@ export default function Hero() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md glass border border-[#0A84FF]/20">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-sm text-[#8B949E] font-mono">Available for opportunities</span>
+            <span className="text-xs sm:text-sm text-[#8B949E] font-mono">Available for opportunities</span>
           </div>
         </motion.div>
 
@@ -110,7 +112,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.6 }}
-          className="text-[#8B949E] text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-[#8B949E] text-base sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2"
         >
           {personalInfo.bio}
         </motion.p>
@@ -120,13 +122,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
-          className="flex flex-wrap items-center justify-center gap-4 mb-12"
+          className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-12"
         >
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="px-8 py-3.5 rounded-md text-white font-semibold bg-[#0A84FF] hover:bg-[#0066CC] transition-colors duration-200"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-md text-white font-semibold bg-[#0A84FF] hover:bg-[#0066CC] transition-colors duration-200 text-center"
           >
             View Projects
           </motion.a>
@@ -135,7 +137,7 @@ export default function Hero() {
             href="#contact"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="px-8 py-3.5 rounded-md font-semibold text-white glass border border-[#30363D] hover:border-[#0A84FF]/50 transition-all duration-200"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-md font-semibold text-white glass border border-[#30363D] hover:border-[#0A84FF]/50 transition-all duration-200 text-center"
           >
             Let's Talk
           </motion.a>
@@ -145,7 +147,7 @@ export default function Hero() {
             download
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="px-8 py-3.5 rounded-md font-semibold text-[#0A84FF] border border-[#0A84FF]/40 hover:bg-[#0A84FF]/5 transition-all duration-200"
+            className="w-full sm:w-auto px-8 py-3.5 rounded-md font-semibold text-[#0A84FF] border border-[#0A84FF]/40 hover:bg-[#0A84FF]/5 transition-all duration-200 text-center"
           >
             Download CV
           </motion.a>
@@ -156,7 +158,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="flex items-center justify-center gap-6"
+          className="flex items-center justify-center flex-wrap gap-4 sm:gap-6"
         >
           {[
             { icon: FiGithub,   href: personalInfo.github,   label: "GitHub" },
@@ -188,7 +190,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
