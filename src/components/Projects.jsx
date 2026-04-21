@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiGithub, FiExternalLink, FiMonitor } from "react-icons/fi";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { projects } from "../data/index";
 
 var filters = ["All", "AI", "Frontend"];
@@ -32,32 +32,22 @@ function TiltCard(props) {
       style={{ transition: "transform 0.2s ease", transformStyle: "preserve-3d" }}
       className="glass rounded-xl overflow-hidden border border-[#30363D]/50 hover:border-[#0A84FF]/30 flex flex-col h-full transition-colors duration-300"
     >
-      {/* Rectangular image placeholder — 16:9 */}
+      {/* Project image — 16:9 */}
       <div className="w-full img-placeholder" style={{ aspectRatio: "16/9" }}>
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2">
-          {/* <FiMonitor size={32} className="text-[#0A84FF]/40" />
-          <span className="text-[#8B949E]/50 text-xs font-mono">Screenshot coming soon</span> */}
-          <img src={project.image} alt="" srcset="" />
-          {/* <img src="" alt="" />{project.image} */}
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
         </div>
-        {/* Fake browser bar */}
-        {/* <div className="absolute top-0 left-0 right-0 h-7 bg-[#161B22] border-b border-[#30363D]/50 flex items-center gap-1.5 px-3 z-10">
-          <span className="w-2 h-2 rounded-full bg-[#FF5F57]/40" />
-          <span className="w-2 h-2 rounded-full bg-[#FEBC2E]/40" />
-          <span className="w-2 h-2 rounded-full bg-[#28C840]/40" />
-          <div className="flex-1 mx-4 h-3.5 bg-[#21262D] rounded-sm" />
-        </div> */}
       </div>
 
       {/* Top accent line */}
       <div className="h-0.5 w-full gradient-animate" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF, #0A84FF)" }} />
 
-      <div className="flex flex-col flex-1 p-5">
+      <div className="flex flex-col flex-1 p-4 sm:p-5">
         {/* Header */}
         <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">{project.icon}</span>
-            <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xl sm:text-2xl">{project.icon}</span>
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
               <span className="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded border text-[#0A84FF] border-[#0A84FF]/20 bg-[#0A84FF]/05">
                 {project.category}
               </span>
@@ -68,24 +58,24 @@ function TiltCard(props) {
               )}
             </div>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
             {project.github && (
               <a href={project.github} target="_blank" rel="noreferrer"
                 className="text-[#8B949E] hover:text-white p-1.5 rounded hover:bg-[#21262D] transition-all duration-200">
-                <FiGithub size={16} />
+                <FiGithub size={15} />
               </a>
             )}
             {project.live && (
               <a href={project.live} target="_blank" rel="noreferrer"
                 className="text-[#8B949E] hover:text-[#0A84FF] p-1.5 rounded hover:bg-[#0A84FF]/10 transition-all duration-200">
-                <FiExternalLink size={16} />
+                <FiExternalLink size={15} />
               </a>
             )}
           </div>
         </div>
 
-        <h3 className="mb-2 text-base font-bold text-white">{project.title}</h3>
-        <p className="text-[#8B949E] text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
+        <h3 className="mb-2 text-sm sm:text-base font-bold text-white">{project.title}</h3>
+        <p className="text-[#8B949E] text-xs sm:text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
 
         <div className="flex flex-wrap gap-1.5">
           {project.techs.map(function(tech) {
@@ -112,17 +102,17 @@ export default function Projects() {
     <section id="projects" className="relative z-10 section">
       <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-[#0A84FF] rounded-full opacity-[0.03] blur-[120px]" />
 
-      <div className="relative px-6 mx-auto max-w-7xl lg:px-12">
+      <div className="relative px-4 sm:px-6 mx-auto max-w-7xl lg:px-12">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center mb-16"
+          className="flex flex-col items-center mb-12 sm:mb-16"
         >
           <span className="text-[#0A84FF] font-mono text-xs tracking-[0.3em] uppercase mb-3">What I've built</span>
-          <h2 className="text-5xl font-black text-white">Featured <span className="gradient-text">Projects</span></h2>
+          <h2 className="text-4xl sm:text-5xl font-black text-white">Featured <span className="gradient-text">Projects</span></h2>
           <div className="w-20 h-1 mt-4 rounded-full" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF)" }} />
         </motion.div>
 
@@ -132,7 +122,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12"
         >
           {filters.map(function(f) {
             var isActive = active === f;
@@ -142,7 +132,7 @@ export default function Projects() {
                 onClick={function() { setActive(f); }}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
-                className={"px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 " +
+                className={"px-4 sm:px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 " +
                   (isActive
                     ? "bg-[#0A84FF] text-white"
                     : "glass border border-[#30363D]/50 text-[#8B949E] hover:text-white hover:border-[#0A84FF]/30"
@@ -154,7 +144,7 @@ export default function Projects() {
           })}
         </motion.div>
 
-        <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map(function(project, i) {
               return (
