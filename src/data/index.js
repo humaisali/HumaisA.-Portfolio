@@ -74,7 +74,7 @@ export const projects = [
     category: "AI",
     featured: true,
     gradient: "from-[#0A84FF] to-[#7B61FF]",
-    image: "/public/ai-career-coach.png",
+    image: "/ai-career-coach.png",
   },
   {
     title: "AI Study Assistant",
@@ -85,7 +85,7 @@ export const projects = [
     category: "AI",
     featured: true,
     gradient: "from-[#00D4FF] to-[#0A84FF]",
-    image: "/public/ai-study-assistant.png",
+    image: "/ai-study-assistant.png",
   },
   {
     title: "PostCraft - AI LinkedIn Post Generator",
@@ -96,7 +96,7 @@ export const projects = [
     category: "AI",
     featured: true,
     gradient: "from-[#4f7cff] to-[#00c6ff]",
-    image: "/public/postcraft.png",
+    image: "/postcraft.png",
   },
   {
     title: "CodeSage",
@@ -107,7 +107,7 @@ export const projects = [
     category: "AI",
     featured: true,
     gradient: "from-[#7B61FF] to-[#00D4FF]",
-    image: "/public/codesage.png",
+    image: "/codesage.png",
   },
   {
     title: "GitHub DevFinder",
@@ -118,7 +118,7 @@ export const projects = [
     category: "Frontend",
     featured: false,
     gradient: "from-[#0A84FF] to-[#00D4FF]",
-    image: "/public/github-devfinder.png",
+    image: "/github-devfinder.png",
   },
   {
     title: "Fida Hussain Portfolio",
@@ -129,6 +129,6 @@ export const projects = [
     category: "Frontend",
     featured: false,
     gradient: "from-[#00D4FF] to-[#7B61FF]",
-    image: "/public/fida-hussain-portfolio.png",
+    image: "/fida-hussain-portfolio.png",
   },
 ];

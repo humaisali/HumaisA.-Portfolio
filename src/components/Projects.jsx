@@ -32,22 +32,19 @@ function TiltCard(props) {
       style={{ transition: "transform 0.2s ease", transformStyle: "preserve-3d" }}
       className="glass rounded-xl overflow-hidden border border-[#30363D]/50 hover:border-[#0A84FF]/30 flex flex-col h-full transition-colors duration-300"
     >
-      {/* Project image — 16:9 */}
       <div className="w-full img-placeholder" style={{ aspectRatio: "16/9" }}>
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2">
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
           <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
         </div>
       </div>
 
-      {/* Top accent line */}
       <div className="h-0.5 w-full gradient-animate" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF, #0A84FF)" }} />
 
       <div className="flex flex-col flex-1 p-4 sm:p-5">
-        {/* Header */}
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xl sm:text-2xl">{project.icon}</span>
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <span className="text-xl">{project.icon}</span>
+            <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded border text-[#0A84FF] border-[#0A84FF]/20 bg-[#0A84FF]/05">
                 {project.category}
               </span>
@@ -58,7 +55,7 @@ function TiltCard(props) {
               )}
             </div>
           </div>
-          <div className="flex gap-1.5 sm:gap-2 flex-shrink-0">
+          <div className="flex gap-1.5 flex-shrink-0">
             {project.github && (
               <a href={project.github} target="_blank" rel="noreferrer"
                 className="text-[#8B949E] hover:text-white p-1.5 rounded hover:bg-[#21262D] transition-all duration-200">
@@ -99,8 +96,8 @@ export default function Projects() {
   });
 
   return (
-    <section id="projects" className="relative z-10 section">
-      <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-[#0A84FF] rounded-full opacity-[0.03] blur-[120px]" />
+    <section id="projects" className="relative z-10 section overflow-hidden">
+      <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-[#0A84FF] rounded-full opacity-[0.03] blur-[120px] pointer-events-none" />
 
       <div className="relative px-4 sm:px-6 mx-auto max-w-7xl lg:px-12">
 
@@ -116,7 +113,6 @@ export default function Projects() {
           <div className="w-20 h-1 mt-4 rounded-full" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF)" }} />
         </motion.div>
 
-        {/* Filter tabs */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -144,7 +140,7 @@ export default function Projects() {
           })}
         </motion.div>
 
-        <motion.div layout className="grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map(function(project, i) {
               return (

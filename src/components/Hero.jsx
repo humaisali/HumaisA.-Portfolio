@@ -15,7 +15,6 @@ export default function Hero() {
     var role = roles[roleIdx];
     var i = 0;
     var timer;
-
     if (typing) {
       timer = setInterval(function() {
         setText(role.slice(0, i + 1));
@@ -48,25 +47,25 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 pb-16"
     >
-      {/* Mesh gradient bg */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#0A84FF] rounded-full opacity-[0.04] blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-[#00D4FF] rounded-full opacity-[0.03] blur-[100px]" />
+      {/* Contained background blobs — pointer-events none, won't cause scroll */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0A84FF] rounded-full opacity-[0.04] blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-[#00D4FF] rounded-full opacity-[0.03] blur-[100px]" />
       </div>
 
-      {/* Grid lines */}
+      {/* Grid lines — contained */}
       <div
-        className="absolute inset-0 z-0 opacity-[0.025]"
+        className="absolute inset-0 z-0 opacity-[0.025] pointer-events-none"
         style={{
           backgroundImage: "linear-gradient(rgba(10,132,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(10,132,255,1) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center w-full">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-12 text-center">
 
         {/* Name — staggered letters */}
-        <div className="flex items-center justify-center flex-wrap gap-0 mb-4 overflow-hidden">
+        <div className="flex items-center justify-center flex-wrap mb-4">
           {letters.map(function(letter, i) {
             return (
               <motion.span
@@ -74,8 +73,11 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 80, rotateX: -90 }}
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="text-[clamp(2.4rem,9vw,7rem)] font-black leading-none tracking-tighter text-white"
-                style={{ display: "inline-block" }}
+                className="font-black leading-none tracking-tighter text-white"
+                style={{
+                  display: "inline-block",
+                  fontSize: "clamp(2.2rem, 8.5vw, 7rem)",
+                }}
               >
                 {letter === " " ? "\u00A0" : letter}
               </motion.span>
@@ -88,7 +90,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-xl sm:text-2xl md:text-3xl font-light text-[#8B949E] mb-3 h-10"
+          className="text-lg sm:text-2xl md:text-3xl font-light text-[#8B949E] mb-3 h-9 sm:h-10"
         >
           <span className="text-[#00D4FF] font-mono font-medium">{text}</span>
           <span className="blink text-[#0A84FF] ml-0.5">|</span>
@@ -102,7 +104,7 @@ export default function Hero() {
           className="flex justify-center mb-6"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md glass border border-[#0A84FF]/20">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
             <span className="text-xs sm:text-sm text-[#8B949E] font-mono">Available for opportunities</span>
           </div>
         </motion.div>
@@ -112,7 +114,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.6 }}
-          className="text-[#8B949E] text-base sm:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-2"
+          className="text-[#8B949E] text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed"
         >
           {personalInfo.bio}
         </motion.p>
@@ -122,32 +124,30 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
-          className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-12"
+          className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 mb-10"
         >
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-md text-white font-semibold bg-[#0A84FF] hover:bg-[#0066CC] transition-colors duration-200 text-center"
+            className="w-full sm:w-auto px-7 py-3 rounded-md text-white font-semibold bg-[#0A84FF] hover:bg-[#0066CC] transition-colors duration-200 text-center text-sm sm:text-base"
           >
             View Projects
           </motion.a>
-
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-md font-semibold text-white glass border border-[#30363D] hover:border-[#0A84FF]/50 transition-all duration-200 text-center"
+            className="w-full sm:w-auto px-7 py-3 rounded-md font-semibold text-white glass border border-[#30363D] hover:border-[#0A84FF]/50 transition-all duration-200 text-center text-sm sm:text-base"
           >
             Let's Talk
           </motion.a>
-
           <motion.a
             href="/cv.pdf"
             download
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="w-full sm:w-auto px-8 py-3.5 rounded-md font-semibold text-[#0A84FF] border border-[#0A84FF]/40 hover:bg-[#0A84FF]/5 transition-all duration-200 text-center"
+            className="w-full sm:w-auto px-7 py-3 rounded-md font-semibold text-[#0A84FF] border border-[#0A84FF]/40 hover:bg-[#0A84FF]/5 transition-all duration-200 text-center text-sm sm:text-base"
           >
             Download CV
           </motion.a>
@@ -176,12 +176,12 @@ export default function Hero() {
                 className="text-[#8B949E] hover:text-[#0A84FF] transition-all duration-200"
                 aria-label={s.label}
               >
-                <Icon size={22} />
+                <Icon size={20} />
               </motion.a>
             );
           })}
-          <div className="w-px h-6 bg-[#30363D]" />
-          <span className="text-[#8B949E] text-sm font-mono">{personalInfo.location}</span>
+          <div className="w-px h-5 bg-[#30363D]" />
+          <span className="text-[#8B949E] text-xs sm:text-sm font-mono">{personalInfo.location}</span>
         </motion.div>
       </div>
 
@@ -190,13 +190,10 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <FiArrowDown className="text-[#8B949E]" size={18} />
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+          <FiArrowDown className="text-[#8B949E]" size={16} />
         </motion.div>
       </motion.div>
     </section>
