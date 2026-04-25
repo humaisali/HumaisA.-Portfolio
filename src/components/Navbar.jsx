@@ -37,13 +37,15 @@ export default function Navbar() {
     return function() { observer.disconnect(); };
   }, []);
 
-  // Smooth scroll handler — works reliably on mobile too
-  function scrollTo(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    var top = el.getBoundingClientRect().top + window.pageYOffset - 80;
-    window.scrollTo({ top: top, behavior: "smooth" });
+  // Close menu first, then scroll after animation completes
+  function scrollToSection(id) {
     setOpen(false);
+    setTimeout(function() {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var top = el.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({ top: top, behavior: "smooth" });
+    }, 150);
   }
 
   var navBg = scrolled
@@ -62,7 +64,7 @@ export default function Navbar() {
         <motion.button
           onClick={function() { window.scrollTo({ top: 0, behavior: "smooth" }); }}
           whileHover={{ scale: 1.02 }}
-          className="relative group flex-shrink-0 bg-transparent border-none cursor-pointer"
+          className="bg-transparent border-none cursor-pointer flex-shrink-0"
         >
           <span className="text-lg sm:text-2xl font-black tracking-tight text-white">
             Humais.Softneer<span className="text-[#0A84FF]">.</span>
@@ -81,7 +83,7 @@ export default function Navbar() {
                 transition={{ delay: 0.1 * i + 0.3 }}
               >
                 <button
-                  onClick={function() { scrollTo(link.href); }}
+                  onClick={function() { scrollToSection(link.href); }}
                   className={"relative text-sm font-medium transition-colors duration-200 hover-line bg-transparent border-none cursor-pointer " +
                     (isActive ? "text-[#0A84FF]" : "text-[#8B949E] hover:text-white")}
                 >
@@ -98,12 +100,12 @@ export default function Navbar() {
           })}
         </ul>
 
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-3">
           <motion.button
-            onClick={function() { scrollTo("contact"); }}
+            onClick={function() { scrollToSection("contact"); }}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="hidden md:flex items-center gap-2 px-4 py-2 rounded-md bg-[#0A84FF] text-white text-sm font-semibold hover:bg-[#0066CC] transition-colors duration-200 border-none cursor-pointer"
+            className="hidden md:flex items-center px-4 py-2 rounded-md bg-[#0A84FF] text-white text-sm font-semibold hover:bg-[#0066CC] transition-colors duration-200 border-none cursor-pointer"
           >
             Hire Me
           </motion.button>
@@ -126,30 +128,38 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden glass border-t border-[#30363D]/50 overflow-hidden"
           >
-            <ul className="flex flex-col px-6 py-5 gap-1">
+            <ul className="flex flex-col px-6 py-4 gap-1">
               {LINKS.map(function(link) {
                 var isActive = active === link.href;
                 return (
                   <li key={link.href}>
-                    <button
-                      onClick={function() { scrollTo(link.href); }}
-                      className={"w-full text-left px-3 py-3 rounded-lg text-base font-medium transition-all duration-200 bg-transparent border-none cursor-pointer " +
+                    <a
+                      href={"#" + link.href}
+                      onClick={function(e) {
+                        e.preventDefault();
+                        scrollToSection(link.href);
+                      }}
+                      className={"block w-full px-3 py-3 rounded-lg text-base font-medium transition-all duration-200 " +
                         (isActive
                           ? "text-[#0A84FF] bg-[#0A84FF]/10"
                           : "text-[#8B949E] hover:text-white hover:bg-[#21262D]")}
                     >
                       {link.label}
-                    </button>
+                    </a>
                   </li>
                 );
               })}
-              <li className="pt-2 border-t border-[#30363D]/50 mt-2">
-                <button
-                  onClick={function() { scrollTo("contact"); }}
-                  className="w-full px-5 py-2.5 bg-[#0A84FF] text-white rounded-md text-sm font-semibold hover:bg-[#0066CC] transition-colors border-none cursor-pointer"
+              <li className="pt-2 mt-1 border-t border-[#30363D]/50">
+                <a
+                  href="#contact"
+                  onClick={function(e) {
+                    e.preventDefault();
+                    scrollToSection("contact");
+                  }}
+                  className="block w-full text-center px-5 py-2.5 bg-[#0A84FF] text-white rounded-md text-sm font-semibold hover:bg-[#0066CC] transition-colors"
                 >
                   Hire Me
-                </button>
+                </a>
               </li>
             </ul>
           </motion.div>

@@ -3,14 +3,6 @@ import { FiGithub, FiLinkedin, FiMail, FiHeart } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
 import { personalInfo } from "../data/index";
 
-var links = [
-  { label: "About",      href: "#about" },
-  { label: "Skills",     href: "#skills" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects",   href: "#projects" },
-  { label: "Contact",    href: "#contact" },
-];
-
 var socials = [
   { icon: FiGithub,   href: personalInfo.github,   label: "GitHub" },
   { icon: FiLinkedin, href: personalInfo.linkedin,  label: "LinkedIn" },
@@ -18,12 +10,28 @@ var socials = [
   { icon: FiMail,     href: "mailto:" + personalInfo.email, label: "Email" },
 ];
 
+var navLinks = [
+  { label: "About",      href: "#about" },
+  { label: "Skills",     href: "#skills" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects",   href: "#projects" },
+  { label: "Contact",    href: "#contact" },
+];
+
 export default function Footer() {
   var year = new Date().getFullYear();
   return (
     <footer className="relative z-10 border-t border-[#30363D]/50 pt-12 sm:pt-16 pb-8 overflow-hidden">
       <div className="px-4 sm:px-6 mx-auto max-w-7xl lg:px-12">
-        <div className="grid gap-8 mb-10 sm:grid-cols-2 md:grid-cols-3">
+
+        {/*
+          Grid columns:
+          — Mobile:  2 columns  (Brand | Contact)  — Navigation is hidden
+          — sm+:     3 columns  (Brand | Navigation | Contact)
+        */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-10">
+
+          {/* Brand */}
           <div>
             <span className="text-xl sm:text-2xl font-black text-white">
               Humais.Softneer<span className="text-[#0A84FF]">.</span>
@@ -35,10 +43,15 @@ export default function Footer() {
               {socials.map(function(s) {
                 var Icon = s.icon;
                 return (
-                  <motion.a key={s.label} href={s.href} target="_blank" rel="noreferrer"
+                  <motion.a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
                     whileHover={{ scale: 1.2 }}
                     aria-label={s.label}
-                    className="text-[#8B949E] hover:text-[#0A84FF] transition-colors duration-200">
+                    className="text-[#8B949E] hover:text-[#0A84FF] transition-colors duration-200"
+                  >
                     <Icon size={17} />
                   </motion.a>
                 );
@@ -46,13 +59,17 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
+          {/* Navigation — hidden on mobile, visible sm+ */}
+          <div className="hidden sm:block">
             <p className="mb-4 font-mono text-xs font-semibold tracking-widest text-white uppercase">Navigation</p>
             <ul className="flex flex-col gap-2.5">
-              {links.map(function(link) {
+              {navLinks.map(function(link) {
                 return (
                   <li key={link.href}>
-                    <a href={link.href} className="text-[#8B949E] hover:text-[#0A84FF] text-sm transition-colors duration-200">
+                    <a
+                      href={link.href}
+                      className="text-[#8B949E] hover:text-[#0A84FF] text-sm transition-colors duration-200"
+                    >
                       {link.label}
                     </a>
                   </li>
@@ -61,11 +78,14 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Contact */}
           <div>
             <p className="mb-4 font-mono text-xs font-semibold tracking-widest text-white uppercase">Contact</p>
             <div className="flex flex-col gap-2.5">
-              <a href={"mailto:" + personalInfo.email}
-                className="text-[#8B949E] hover:text-[#0A84FF] text-xs transition-colors duration-200 font-mono break-all">
+              <a
+                href={"mailto:" + personalInfo.email}
+                className="text-[#8B949E] hover:text-[#0A84FF] text-xs transition-colors duration-200 font-mono break-all"
+              >
                 {personalInfo.email}
               </a>
               <p className="text-[#8B949E] text-sm">{personalInfo.location}</p>
@@ -75,8 +95,10 @@ export default function Footer() {
               </div>
             </div>
           </div>
+
         </div>
 
+        {/* Bottom bar */}
         <div className="border-t border-[#30363D]/50 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#8B949E] text-xs font-mono text-center sm:text-left">
             © {year} <span className="text-[#0A84FF]">Humais Ali</span>. All rights reserved.
@@ -85,6 +107,7 @@ export default function Footer() {
             Built with <FiHeart size={11} className="text-red-400" /> using React + Vite + Tailwind
           </p>
         </div>
+
       </div>
     </footer>
   );
