@@ -45,7 +45,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 pb-16"
+      className="relative flex flex-col items-center justify-center min-h-screen pt-24 pb-16 overflow-hidden"
     >
       {/* Contained background blobs — pointer-events none, won't cause scroll */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -62,10 +62,10 @@ export default function Hero() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-12 text-center">
+      <div className="relative z-10 w-full px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-12">
 
         {/* Name — staggered letters */}
-        <div className="flex items-center justify-center flex-wrap mb-4">
+        <div className="flex flex-wrap items-center justify-center mb-4">
           {letters.map(function(letter, i) {
             return (
               <motion.span
@@ -104,7 +104,7 @@ export default function Hero() {
           className="flex justify-center mb-6"
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-md glass border border-[#0A84FF]/20">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
+            <span className="flex-shrink-0 w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             <span className="text-xs sm:text-sm text-[#8B949E] font-mono">Available for opportunities</span>
           </div>
         </motion.div>
@@ -124,7 +124,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
-          className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 mb-10"
+          className="flex flex-col flex-wrap items-center justify-center gap-3 mb-10 sm:flex-row"
         >
           <motion.a
             href="#projects"
@@ -143,7 +143,7 @@ export default function Hero() {
             Let's Talk
           </motion.a>
           <motion.a
-            href="/cv.pdf"
+            href="/Humais-Resume.pdf"
             download
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
@@ -158,7 +158,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="flex items-center justify-center flex-wrap gap-4 sm:gap-6"
+          className="flex flex-wrap items-center justify-center gap-4 sm:gap-6"
         >
           {[
             { icon: FiGithub,   href: personalInfo.github,   label: "GitHub" },
@@ -190,7 +190,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        className="absolute z-10 flex flex-col items-center gap-2 -translate-x-1/2 bottom-6 left-1/2"
       >
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
           <FiArrowDown className="text-[#8B949E]" size={16} />
