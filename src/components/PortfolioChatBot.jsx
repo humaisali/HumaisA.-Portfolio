@@ -1,9 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMessageSquare, FiX, FiSend, FiUser } from "react-icons/fi";
+import { FiMessageSquare, FiX, FiSend, FiUser, FiExternalLink } from "react-icons/fi";
 import { RiRobot2Line } from "react-icons/ri";
 
-// ─── All knowledge about Humais that the bot can draw from ───────────────────
 var SYSTEM_PROMPT = `You are Humais Ali's personal portfolio assistant. Your ONLY job is to answer questions about Humais Ali — his skills, projects, education, experience, and how to contact him. You are friendly, concise, and professional.
 
 Here is everything you know about Humais:
@@ -49,13 +48,12 @@ AVAILABILITY:
 - Interested in AI + web development opportunities
 
 RULES YOU MUST FOLLOW:
-1. Only answer questions about Humais Ali and his portfolio. If someone asks anything unrelated (general programming help, world news, math, etc.), respond with: "I'm here to answer questions about Humais Ali and his work. Please ask me something related to Humais — his skills, projects, experience, or how to contact him! 😊"
+1. Only answer questions about Humais Ali and his portfolio. If someone asks anything unrelated, respond with: "I'm here to answer questions about Humais Ali and his work. Please ask me something related to Humais — his skills, projects, experience, or how to contact him! 😊"
 2. Keep answers short and helpful — 2 to 5 sentences max unless listing items.
 3. Be warm and conversational, not robotic.
-4. If asked for contact info, always provide the email and LinkedIn.
+4. When mentioning contact info, emails, GitHub, LinkedIn or any live/GitHub links — always write the full URL so it renders as a clickable link.
 5. Never make up information not listed above.`;
 
-// Gemini API config — key read from Vite env var
 var GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 var GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" +
@@ -68,9 +66,53 @@ var SUGGESTIONS = [
   "Tell me about his AI projects",
 ];
 
+// ─── Splits bot text into plain strings + clickable <a> elements ─────────────
+function renderMessageContent(text) {
+  // Matches full http/https URLs and bare email addresses
+  var TOKEN_RE = /(https?:\/\/[^\s)\]]+)|([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})/g;
+  var parts = [];
+  var last = 0;
+  var match;
+
+  while ((match = TOKEN_RE.exec(text)) !== null) {
+    // Plain text before the match
+    if (match.index > last) {
+      parts.push(text.slice(last, match.index));
+    }
+
+    var raw = match[0];
+    var isEmail = !raw.startsWith("http");
+    var href = isEmail ? "mailto:" + raw : raw;
+
+    parts.push(
+      <a
+        key={match.index}
+        href={href}
+        target={isEmail ? "_self" : "_blank"}
+        rel="noreferrer"
+        className="inline-flex items-center gap-0.5 text-[#0A84FF] hover:text-[#00D4FF] underline underline-offset-2 decoration-[#0A84FF]/40 transition-colors duration-150 break-all"
+      >
+        {raw}
+        {!isEmail && <FiExternalLink size={10} className="flex-shrink-0 ml-0.5 mt-px" />}
+      </a>
+    );
+
+    last = match.index + raw.length;
+  }
+
+  // Remaining plain text
+  if (last < text.length) {
+    parts.push(text.slice(last));
+  }
+
+  return parts;
+}
+
+// ─── Single message bubble ────────────────────────────────────────────────────
 function Message(props) {
   var msg = props.msg;
   var isBot = msg.role === "assistant";
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -79,35 +121,27 @@ function Message(props) {
       className={"flex gap-2.5 " + (isBot ? "flex-row" : "flex-row-reverse")}
     >
       {/* Avatar */}
-      <div
-        className={
-          "w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 " +
-          (isBot
-            ? "bg-[#0A84FF]/20 border border-[#0A84FF]/30"
-            : "bg-[#21262D] border border-[#30363D]")
+      <div className={"w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 " +
+        (isBot ? "bg-[#0A84FF]/20 border border-[#0A84FF]/30" : "bg-[#21262D] border border-[#30363D]")}>
+        {isBot
+          ? <RiRobot2Line size={14} className="text-[#0A84FF]" />
+          : <FiUser size={12} className="text-[#8B949E]" />
         }
-      >
-        {isBot ? (
-          <RiRobot2Line size={14} className="text-[#0A84FF]" />
-        ) : (
-          <FiUser size={12} className="text-[#8B949E]" />
-        )}
       </div>
+
       {/* Bubble */}
-      <div
-        className={
-          "max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed " +
-          (isBot
-            ? "bg-[#161B22] border border-[#30363D]/60 text-[#E6EDF3] rounded-tl-sm"
-            : "bg-[#0A84FF] text-white rounded-tr-sm")
-        }
-      >
-        {msg.content}
+      <div className={"max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed " +
+        (isBot
+          ? "bg-[#161B22] border border-[#30363D]/60 text-[#E6EDF3] rounded-tl-sm"
+          : "bg-[#0A84FF] text-white rounded-tr-sm")}>
+        {/* Only parse links in bot messages; user messages are plain */}
+        {isBot ? renderMessageContent(msg.content) : msg.content}
       </div>
     </motion.div>
   );
 }
 
+// ─── Animated typing dots ─────────────────────────────────────────────────────
 function TypingIndicator() {
   return (
     <div className="flex gap-2.5">
@@ -115,7 +149,7 @@ function TypingIndicator() {
         <RiRobot2Line size={14} className="text-[#0A84FF]" />
       </div>
       <div className="bg-[#161B22] border border-[#30363D]/60 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
-        {[0, 1, 2].map(function (i) {
+        {[0, 1, 2].map(function(i) {
           return (
             <motion.span
               key={i}
@@ -130,13 +164,13 @@ function TypingIndicator() {
   );
 }
 
+// ─── Main component ───────────────────────────────────────────────────────────
 export default function PortfolioChatBot() {
   var [open, setOpen] = useState(false);
   var [messages, setMessages] = useState([
     {
       role: "assistant",
-      content:
-        "Hey! 👋 I'm Humais's portfolio assistant. Ask me anything about his skills, projects, experience, or how to get in touch!",
+      content: "Hey! 👋 I'm Humais's portfolio assistant. Ask me anything about his skills, projects, experience, or how to get in touch!",
     },
   ]);
   var [input, setInput] = useState("");
@@ -145,25 +179,17 @@ export default function PortfolioChatBot() {
   var bottomRef = useRef(null);
   var inputRef = useRef(null);
 
-  useEffect(
-    function () {
-      if (bottomRef.current) {
-        bottomRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-    },
-    [messages, loading]
-  );
+  useEffect(function() {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, loading]);
 
-  useEffect(
-    function () {
-      if (open && inputRef.current) {
-        setTimeout(function () {
-          inputRef.current.focus();
-        }, 300);
-      }
-    },
-    [open]
-  );
+  useEffect(function() {
+    if (open && inputRef.current) {
+      setTimeout(function() { inputRef.current.focus(); }, 300);
+    }
+  }, [open]);
 
   async function sendMessage(text) {
     var userText = (text || input).trim();
@@ -171,18 +197,15 @@ export default function PortfolioChatBot() {
 
     setInput("");
     setShowSuggestions(false);
-    setMessages(function (prev) {
+    setMessages(function(prev) {
       return prev.concat({ role: "user", content: userText });
     });
     setLoading(true);
 
     try {
-      // Build Gemini-formatted conversation history.
-      // Gemini uses "user" / "model" roles (not "assistant").
-      // The system prompt goes into systemInstruction, not the contents array.
       var history = messages.concat({ role: "user", content: userText });
 
-      var contents = history.map(function (m) {
+      var contents = history.map(function(m) {
         return {
           role: m.role === "assistant" ? "model" : "user",
           parts: [{ text: m.content }],
@@ -193,21 +216,13 @@ export default function PortfolioChatBot() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          systemInstruction: {
-            parts: [{ text: SYSTEM_PROMPT }],
-          },
+          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
           contents: contents,
-          generationConfig: {
-            maxOutputTokens: 800,
-            temperature: 0.7,
-          },
+          generationConfig: { maxOutputTokens: 800, temperature: 0.7 },
         }),
       });
 
       var data = await response.json();
-
-      // Gemini response shape:
-      // data.candidates[0].content.parts[0].text
       var reply =
         data.candidates &&
         data.candidates[0] &&
@@ -218,11 +233,11 @@ export default function PortfolioChatBot() {
           ? data.candidates[0].content.parts[0].text
           : "Sorry, I couldn't get a response right now. Please try again!";
 
-      setMessages(function (prev) {
+      setMessages(function(prev) {
         return prev.concat({ role: "assistant", content: reply });
       });
     } catch (err) {
-      setMessages(function (prev) {
+      setMessages(function(prev) {
         return prev.concat({
           role: "assistant",
           content: "Something went wrong. Please try again in a moment!",
@@ -242,13 +257,9 @@ export default function PortfolioChatBot() {
 
   return (
     <>
-      {/* Floating toggle button */}
+      {/* ── Floating toggle button ── */}
       <motion.button
-        onClick={function () {
-          setOpen(function (p) {
-            return !p;
-          });
-        }}
+        onClick={function() { setOpen(function(p) { return !p; }); }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         className="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-[200] rounded-full bg-[#0A84FF] text-white shadow-lg shadow-[#0A84FF]/30 flex items-center justify-center border-none cursor-pointer"
@@ -256,29 +267,15 @@ export default function PortfolioChatBot() {
         aria-label="Open chat"
       >
         <AnimatePresence mode="wait">
-          {open ? (
-            <motion.span
-              key="x"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <FiX size={22} />
-            </motion.span>
-          ) : (
-            <motion.span
-              key="chat"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <FiMessageSquare size={20} />
-            </motion.span>
-          )}
+          {open
+            ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <FiX size={22} />
+              </motion.span>
+            : <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+                <FiMessageSquare size={20} />
+              </motion.span>
+          }
         </AnimatePresence>
-        {/* Pulse ring */}
         {!open && (
           <motion.span
             className="absolute inset-0 rounded-full border-2 border-[#0A84FF]"
@@ -288,7 +285,7 @@ export default function PortfolioChatBot() {
         )}
       </motion.button>
 
-      {/* Chat window */}
+      {/* ── Chat window ── */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -304,51 +301,39 @@ export default function PortfolioChatBot() {
           >
             <div
               className="flex flex-col h-full rounded-2xl overflow-hidden border border-[#30363D]/70 shadow-2xl shadow-black/50"
-              style={{
-                background: "rgba(13, 17, 23, 0.97)",
-                backdropFilter: "blur(24px)",
-              }}
+              style={{ background: "rgba(13, 17, 23, 0.97)", backdropFilter: "blur(24px)" }}
             >
               {/* Header */}
               <div
-                className="flex items-center gap-3 px-4 py-3.5 border-b border-[#30363D]/60"
-                style={{
-                  background:
-                    "linear-gradient(135deg, rgba(10,132,255,0.12), rgba(0,212,255,0.06))",
-                }}
+                className="flex items-center gap-3 px-4 py-3.5 border-b border-[#30363D]/60 flex-shrink-0"
+                style={{ background: "linear-gradient(135deg, rgba(10,132,255,0.12), rgba(0,212,255,0.06))" }}
               >
                 <div className="w-8 h-8 rounded-full bg-[#0A84FF]/20 border border-[#0A84FF]/40 flex items-center justify-center flex-shrink-0">
                   <RiRobot2Line size={16} className="text-[#0A84FF]" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-white font-semibold text-sm leading-none mb-0.5">
-                    Humais's Assistant
-                  </p>
+                  <p className="text-white font-semibold text-sm leading-none mb-0.5">Humais's Assistant</p>
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-[#8B949E] text-xs font-mono">
-                      Online · Ask me anything
-                    </span>
+                    <span className="text-[#8B949E] text-xs font-mono">Online · Ask me anything</span>
                   </div>
                 </div>
                 <button
-                  onClick={function () {
-                    setOpen(false);
-                  }}
+                  onClick={function() { setOpen(false); }}
                   className="text-[#8B949E] hover:text-white transition-colors bg-transparent border-none cursor-pointer p-1"
                 >
                   <FiX size={16} />
                 </button>
               </div>
 
-              {/* Messages */}
-              <div className="flex flex-col flex-1 gap-3 px-4 py-4 overflow-y-auto chatbot-messages">
-                {messages.map(function (msg, i) {
+              {/* Messages scroll area */}
+              <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 chatbot-messages">
+                {messages.map(function(msg, i) {
                   return <Message key={i} msg={msg} />;
                 })}
                 {loading && <TypingIndicator />}
 
-                {/* Quick suggestions — shown only before first message */}
+                {/* Quick suggestions */}
                 {showSuggestions && messages.length === 1 && !loading && (
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
@@ -356,16 +341,12 @@ export default function PortfolioChatBot() {
                     transition={{ delay: 0.3 }}
                     className="flex flex-col gap-2 mt-1"
                   >
-                    <p className="text-[#8B949E] text-xs font-mono px-1">
-                      Suggested questions:
-                    </p>
-                    {SUGGESTIONS.map(function (s) {
+                    <p className="text-[#8B949E] text-xs font-mono px-1">Suggested questions:</p>
+                    {SUGGESTIONS.map(function(s) {
                       return (
                         <button
                           key={s}
-                          onClick={function () {
-                            sendMessage(s);
-                          }}
+                          onClick={function() { sendMessage(s); }}
                           className="text-left px-3 py-2 rounded-lg border border-[#30363D]/60 text-[#8B949E] hover:text-white hover:border-[#0A84FF]/40 hover:bg-[#0A84FF]/05 text-xs transition-all duration-200 bg-transparent cursor-pointer"
                         >
                           {s}
@@ -378,25 +359,21 @@ export default function PortfolioChatBot() {
                 <div ref={bottomRef} />
               </div>
 
-              {/* Input */}
-              <div className="px-3 pb-3 pt-2 border-t border-[#30363D]/60">
+              {/* Input bar */}
+              <div className="px-3 pb-3 pt-2 border-t border-[#30363D]/60 flex-shrink-0">
                 <div className="flex items-center gap-2 bg-[#161B22] border border-[#30363D] rounded-xl px-3 py-2.5 focus-within:border-[#0A84FF]/50 transition-colors duration-200">
                   <input
                     ref={inputRef}
                     type="text"
                     value={input}
-                    onChange={function (e) {
-                      setInput(e.target.value);
-                    }}
+                    onChange={function(e) { setInput(e.target.value); }}
                     onKeyDown={handleKeyDown}
                     placeholder="Ask about Humais..."
                     className="flex-1 bg-transparent text-white text-sm placeholder-[#8B949E] outline-none font-mono min-w-0"
                     disabled={loading}
                   />
                   <button
-                    onClick={function () {
-                      sendMessage();
-                    }}
+                    onClick={function() { sendMessage(); }}
                     disabled={!input.trim() || loading}
                     className="w-7 h-7 rounded-lg bg-[#0A84FF] flex items-center justify-center flex-shrink-0 border-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#0066CC] transition-colors duration-200"
                   >
