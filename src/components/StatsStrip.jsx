@@ -28,7 +28,7 @@ function Counter(props) {
 export default function StatsStrip() {
   return (
     <div className="relative z-10 border-y border-[#30363D]/50">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
+      <div className="px-6 py-8 mx-auto max-w-7xl lg:px-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-[#30363D]/50">
           {stats.map(function(s, i) {
             return (
@@ -38,9 +38,9 @@ export default function StatsStrip() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center text-center px-6"
+                className="flex flex-col items-center px-6 text-center"
               >
-                <div className="text-4xl font-black gradient-text leading-none mb-1">
+                <div className="mb-1 text-4xl font-black leading-none gradient-text">
                   <Counter target={s.value} />{s.suffix}
                 </div>
                 <div className="text-[#8B949E] text-sm font-mono mt-1">{s.label}</div>

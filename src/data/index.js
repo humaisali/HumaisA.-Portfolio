@@ -47,7 +47,7 @@ export const experience = [
   {
     role: "Full Stack Developer",
     company: "SkyTech Developers",
-    period: "2024 — Present",
+    period: "2024 - Present",
     type: "Freelance",
     color: "#0A84FF",
     description: "Building full-stack web apps and AI-powered tools for clients. Handling everything from UI design to backend APIs and AI integrations.",
@@ -56,7 +56,7 @@ export const experience = [
   {
     role: "B.Sc. Software Engineering",
     company: "UET Mardan",
-    period: "2022 — Present",
+    period: "2022 - Present",
     type: "University",
     color: "#00D4FF",
     description: "6th semester student studying DSA, Machine Learning, Web Engineering, Software Project Management, and Software Quality Engineering.",
@@ -67,7 +67,7 @@ export const experience = [
 export const projects = [
   {
     title: "AI Career Coach",
-    description: "Analyzes GitHub profiles, portfolios, and resumes — delivering honest recruiter-level career insights powered by Gemini 2.5 Flash.",
+    description: "Analyzes GitHub profiles, portfolios, and resumes - delivering honest recruiter-level career insights powered by Gemini 2.5 Flash.",
     techs: ["React", "Node.js", "Gemini AI", "Tailwind", "pdf-parse"],
     github: "https://github.com/humaisali/AI-Career-Coach",
     live: "",

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiMessageSquare, FiX, FiSend, FiUser, FiExternalLink } from "react-icons/fi";
 import { RiRobot2Line } from "react-icons/ri";
 
-var SYSTEM_PROMPT = `You are Humais Ali's personal portfolio assistant. Your ONLY job is to answer questions about Humais Ali — his skills, projects, education, experience, and how to contact him. You are friendly, concise, and professional.
+var SYSTEM_PROMPT = `You are Humais Ali's personal portfolio assistant. Your ONLY job is to answer questions about Humais Ali - his skills, projects, education, experience, and how to contact him. You are friendly, concise, and professional.
 
 Here is everything you know about Humais:
 
@@ -23,7 +23,7 @@ EDUCATION:
 - Subjects: Data Structures & Algorithms (DSA), Machine Learning, Web Engineering, Software Project Management, Software Quality Engineering, Databases, OOP
 
 WORK EXPERIENCE:
-- Role: Full Stack Developer at SkyTech Developers (Freelance) — 2024 to Present
+- Role: Full Stack Developer at SkyTech Developers (Freelance) - 2024 to Present
 - Builds full-stack web apps and AI-powered tools for clients
 - Handles everything from UI design to backend APIs and AI integrations
 
@@ -35,24 +35,56 @@ TECHNICAL SKILLS:
 - Tools: Git & GitHub (85%)
 - Stack short: MERN, Next.js, Python, Gemini AI
 
-PROJECTS:
-1. AI Career Coach — Analyzes GitHub profiles, portfolios, and resumes using Gemini 2.5 Flash for recruiter-level career insights. Stack: React, Node.js, Gemini AI, Tailwind, pdf-parse. GitHub: https://github.com/humaisali/AI-Career-Coach
-2. AI Study Assistant — Upload study documents (PDF, TXT, MD, PPTX) and get AI-generated explanations, summaries, and quizzes. Deployed on Vercel. Stack: React, Node.js, Gemini AI, Multer, pdf-parse. GitHub: https://github.com/humaisali/AI-Study-Assitent | Live: https://ai-study-assistant-ashy.vercel.app/
-3. PostCraft — AI LinkedIn post generator. Generates professional LinkedIn posts, hook variations, and hashtags from a short project description using Gemini 2.5 Flash. Stack: React, Vite, Tailwind, Node.js, Express, Gemini AI
-4. CodeSage — Paste any code snippet and get step-by-step explanations, bug detection with severity ratings, and optimization analysis. Stack: React, Tailwind, Node.js, Gemini AI, Express. GitHub: https://github.com/humaisali/CodeSage-AI-Code-Explainer
-5. GitHub DevFinder — Search any GitHub username and view analytics dashboard with language charts, stars, contribution heatmap, and activity. Stack: React, Vite, Tailwind, Recharts, GitHub API. GitHub: https://github.com/humaisali/GitHub-DevFinder | Live: https://github-devfinder-opal.vercel.app/
-6. Fida Hussain Portfolio — Clean, responsive personal portfolio built for a client under SkyTech Developers. Stack: React, Vite, Tailwind, Framer Motion, EmailJS. Live: https://fida-hussain-portoflio.vercel.app/
+PROJECTS (always include the GitHub and Live links when mentioning any project):
+
+1. AI Career Coach
+   - Description: Analyzes GitHub profiles, portfolios, and resumes using Gemini 2.5 Flash for recruiter-level career insights.
+   - Stack: React, Node.js, Gemini AI, Tailwind, pdf-parse
+   - GitHub: https://github.com/humaisali/AI-Career-Coach
+   - Live: Not deployed yet
+
+2. AI Study Assistant
+   - Description: Upload study documents (PDF, TXT, MD, PPTX) and get AI-generated explanations, summaries, and quizzes.
+   - Stack: React, Node.js, Gemini AI, Multer, pdf-parse
+   - GitHub: https://github.com/humaisali/AI-Study-Assitent
+   - Live: https://ai-study-assistant-ashy.vercel.app/
+
+3. PostCraft - AI LinkedIn Post Generator
+   - Description: Generates professional LinkedIn posts, hook variations, and hashtags from a short project description using Gemini 2.5 Flash.
+   - Stack: React, Vite, Tailwind, Node.js, Express, Gemini AI
+   - GitHub: Not public
+   - Live: Not deployed yet
+
+4. CodeSage - AI Code Explainer
+   - Description: Paste any code snippet and get step-by-step explanations, bug detection with severity ratings, and optimization analysis.
+   - Stack: React, Tailwind, Node.js, Gemini AI, Express
+   - GitHub: https://github.com/humaisali/CodeSage-AI-Code-Explainer
+   - Live: Not deployed yet
+
+5. GitHub DevFinder
+   - Description: Search any GitHub username and view analytics dashboard with language charts, stars, contribution heatmap, and activity.
+   - Stack: React, Vite, Tailwind, Recharts, GitHub API
+   - GitHub: https://github.com/humaisali/GitHub-DevFinder
+   - Live: https://github-devfinder-opal.vercel.app/
+
+6. Fida Hussain Portfolio
+   - Description: Clean, responsive personal portfolio built for a client under SkyTech Developers.
+   - Stack: React, Vite, Tailwind, Framer Motion, EmailJS
+   - GitHub: https://github.com/humaisali/Fida-Hussain-Portfolio
+   - Live: https://fida-hussain-portoflio.vercel.app/
 
 AVAILABILITY:
 - Open to internships, freelance work, and collaborations
 - Interested in AI + web development opportunities
 
 RULES YOU MUST FOLLOW:
-1. Only answer questions about Humais Ali and his portfolio. If someone asks anything unrelated, respond with: "I'm here to answer questions about Humais Ali and his work. Please ask me something related to Humais — his skills, projects, experience, or how to contact him! 😊"
-2. Keep answers short and helpful — 2 to 5 sentences max unless listing items.
+1. Only answer questions about Humais Ali and his portfolio. If someone asks anything unrelated, respond with: "I'm here to answer questions about Humais Ali and his work. Please ask me something related to Humais - his skills, projects, experience, or how to contact him! 😊"
+2. Keep answers short and helpful - 2 to 5 sentences max unless listing items.
 3. Be warm and conversational, not robotic.
-4. When mentioning contact info, emails, GitHub, LinkedIn or any live/GitHub links — always write the full URL so it renders as a clickable link.
-5. Never make up information not listed above.`;
+4. CRITICAL - PROJECTS RULE: Whenever you mention ANY project by name, you MUST always include its GitHub link on the same line right after the project name, like this format: "Project Name - https://github.com/..." and if it has a live link, include that too. Never mention a project without its link. Even if the user only asks about one project, give both GitHub and Live links if available.
+5. When mentioning contact info, emails, GitHub, LinkedIn or any live/GitHub links - always write the full URL so it renders as a clickable link.
+6. Never make up information not listed above.
+7. If a project has no public GitHub or no live link, say so honestly (e.g. "not deployed yet" or "private repo").`;
 
 var GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
 var GEMINI_API_URL =
@@ -68,14 +100,12 @@ var SUGGESTIONS = [
 
 // ─── Splits bot text into plain strings + clickable <a> elements ─────────────
 function renderMessageContent(text) {
-  // Matches full http/https URLs and bare email addresses
   var TOKEN_RE = /(https?:\/\/[^\s)\]]+)|([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,})/g;
   var parts = [];
   var last = 0;
   var match;
 
   while ((match = TOKEN_RE.exec(text)) !== null) {
-    // Plain text before the match
     if (match.index > last) {
       parts.push(text.slice(last, match.index));
     }
@@ -100,7 +130,6 @@ function renderMessageContent(text) {
     last = match.index + raw.length;
   }
 
-  // Remaining plain text
   if (last < text.length) {
     parts.push(text.slice(last));
   }
@@ -120,7 +149,6 @@ function Message(props) {
       transition={{ duration: 0.25 }}
       className={"flex gap-2.5 " + (isBot ? "flex-row" : "flex-row-reverse")}
     >
-      {/* Avatar */}
       <div className={"w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 " +
         (isBot ? "bg-[#0A84FF]/20 border border-[#0A84FF]/30" : "bg-[#21262D] border border-[#30363D]")}>
         {isBot
@@ -129,12 +157,10 @@ function Message(props) {
         }
       </div>
 
-      {/* Bubble */}
       <div className={"max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed " +
         (isBot
           ? "bg-[#161B22] border border-[#30363D]/60 text-[#E6EDF3] rounded-tl-sm"
           : "bg-[#0A84FF] text-white rounded-tr-sm")}>
-        {/* Only parse links in bot messages; user messages are plain */}
         {isBot ? renderMessageContent(msg.content) : msg.content}
       </div>
     </motion.div>
@@ -327,7 +353,7 @@ export default function PortfolioChatBot() {
               </div>
 
               {/* Messages scroll area */}
-              <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3 chatbot-messages">
+              <div className="flex flex-col flex-1 gap-3 px-4 py-4 overflow-y-auto chatbot-messages">
                 {messages.map(function(msg, i) {
                   return <Message key={i} msg={msg} />;
                 })}

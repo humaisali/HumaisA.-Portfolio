@@ -4,8 +4,8 @@ import { personalInfo } from "../data/index";
 
 export default function About() {
   return (
-    <section id="about" className="section relative z-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="about" className="relative z-10 overflow-hidden section">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-12">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -15,11 +15,11 @@ export default function About() {
           className="flex flex-col items-center mb-12 sm:mb-20"
         >
           <span className="text-[#0A84FF] font-mono text-xs tracking-[0.3em] uppercase mb-3">Who I am</span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white">About <span className="gradient-text">Me</span></h2>
-          <div className="w-20 h-1 rounded-full mt-4" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF)" }} />
+          <h2 className="text-4xl font-black text-white sm:text-5xl">About <span className="gradient-text">Me</span></h2>
+          <div className="w-20 h-1 mt-4 rounded-full" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF)" }} />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
 
           {/* Left */}
           <motion.div
@@ -36,7 +36,7 @@ export default function About() {
               >
                 DEV
               </div>
-              <h3 className="relative text-2xl sm:text-3xl font-bold text-white mb-5 leading-tight">
+              <h3 className="relative mb-5 text-2xl font-bold leading-tight text-white sm:text-3xl">
                 Building the future with<br />
                 <span className="gradient-text">AI + Web Technology</span>
               </h3>
@@ -45,8 +45,8 @@ export default function About() {
                 working at the intersection of artificial intelligence and modern web development.
               </p>
               <p className="text-[#8B949E] leading-relaxed mb-4 text-sm sm:text-base">
-                At SkyTech Developers, I've built and shipped multiple AI-powered full-stack applications —
-                from code explainers to career coaching tools — all using React, Node.js, and Google's Gemini API.
+                At SkyTech Developers, I've built and shipped multiple AI-powered full-stack applications -
+                from code explainers to career coaching tools - all using React, Node.js, and Google's Gemini API.
               </p>
               <p className="text-[#8B949E] leading-relaxed mb-8 text-sm sm:text-base">
                 When I'm not building, I'm grinding DSA on LeetCode, exploring ML research, or
@@ -54,7 +54,7 @@ export default function About() {
               </p>
               <div className="inline-flex items-center gap-3 px-4 sm:px-5 py-3 rounded-md glass border border-[#0A84FF]/20">
                 <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
-                <span className="text-white text-xs sm:text-sm font-medium">Open to internships & freelance work</span>
+                <span className="text-xs font-medium text-white sm:text-sm">Open to internships & freelance work</span>
               </div>
             </div>
           </motion.div>
@@ -90,7 +90,7 @@ export default function About() {
                   </div>
                   <div className="min-w-0">
                     <p className="text-[#8B949E] text-xs font-mono uppercase tracking-wider">{item.label}</p>
-                    <p className="text-white font-medium text-xs sm:text-sm truncate">{item.value}</p>
+                    <p className="text-xs font-medium text-white truncate sm:text-sm">{item.value}</p>
                   </div>
                 </motion.div>
               );
