@@ -34,7 +34,7 @@ function TiltCard(props) {
     >
       <div className="w-full img-placeholder" style={{ aspectRatio: "16/9" }}>
         <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+          <img src={project.image} alt={project.title} className="object-cover w-full h-full" />
         </div>
       </div>
 
@@ -42,7 +42,7 @@ function TiltCard(props) {
 
       <div className="flex flex-col flex-1 p-4 sm:p-5">
         <div className="flex items-start justify-between mb-3">
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-xl">{project.icon}</span>
             <div className="flex flex-wrap items-center gap-1.5">
               <span className="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded border text-[#0A84FF] border-[#0A84FF]/20 bg-[#0A84FF]/05">
@@ -71,7 +71,7 @@ function TiltCard(props) {
           </div>
         </div>
 
-        <h3 className="mb-2 text-sm sm:text-base font-bold text-white">{project.title}</h3>
+        <h3 className="mb-2 text-sm font-bold text-white sm:text-base">{project.title}</h3>
         <p className="text-[#8B949E] text-xs sm:text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
 
         <div className="flex flex-wrap gap-1.5">
@@ -96,10 +96,10 @@ export default function Projects() {
   });
 
   return (
-    <section id="projects" className="relative z-10 section overflow-hidden">
+    <section id="projects" className="relative z-10 overflow-hidden section">
       <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-[#0A84FF] rounded-full opacity-[0.03] blur-[120px] pointer-events-none" />
 
-      <div className="relative px-4 sm:px-6 mx-auto max-w-7xl lg:px-12">
+      <div className="relative px-4 mx-auto sm:px-6 max-w-7xl lg:px-12">
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -109,7 +109,7 @@ export default function Projects() {
           className="flex flex-col items-center mb-12 sm:mb-16"
         >
           <span className="text-[#0A84FF] font-mono text-xs tracking-[0.3em] uppercase mb-3">What I've built</span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white">Featured <span className="gradient-text">Projects</span></h2>
+          <h2 className="text-4xl font-black text-white sm:text-5xl">Featured <span className="gradient-text">Projects</span></h2>
           <div className="w-20 h-1 mt-4 rounded-full" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF)" }} />
         </motion.div>
 
@@ -118,7 +118,7 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12"
+          className="flex flex-wrap justify-center gap-2 mb-10 sm:gap-3 sm:mb-12"
         >
           {filters.map(function(f) {
             var isActive = active === f;
