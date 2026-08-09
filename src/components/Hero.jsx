@@ -6,12 +6,11 @@ import { personalInfo } from "../data/index";
 import VengeanceButton from "./VengeanceButton";
 import SocialFlipButton from "./SocialFlipButton";
 import MorphText from "./MorphText";
+import FlipText from "./FlipText";
 
 var roles = personalInfo.roles;
 
 export default function Hero() {
-  var letters = "HUMAIS ALI".split("");
-
   return (
     <section
       id="hero"
@@ -35,24 +34,10 @@ export default function Hero() {
       <div className="relative z-10 w-full px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-12">
 
         {/* Name — staggered letters */}
-        <div className="flex flex-wrap items-center justify-center mb-4">
-          {letters.map(function(letter, i) {
-            return (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 80, rotateX: -90 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                className="font-black leading-none tracking-tighter text-white"
-                style={{
-                  display: "inline-block",
-                  fontSize: "clamp(2.2rem, 8.5vw, 7rem)",
-                }}
-              >
-                {letter === " " ? "\u00A0" : letter}
-              </motion.span>
-            );
-          })}
+        <div className="flex flex-wrap items-center justify-center mb-4" style={{ fontSize: "clamp(2.2rem, 8.5vw, 7rem)" }}>
+          <FlipText className="font-black leading-none tracking-tighter text-white">
+            HUMAIS ALI
+          </FlipText>
         </div>
 
         {/* Morphing role */}
