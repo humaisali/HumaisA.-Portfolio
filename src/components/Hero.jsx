@@ -1,47 +1,15 @@
-import { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiArrowDown } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
 import { personalInfo } from "../data/index";
 import VengeanceButton from "./VengeanceButton";
 import SocialFlipButton from "./SocialFlipButton";
+import MorphText from "./MorphText";
 
 var roles = personalInfo.roles;
 
 export default function Hero() {
-  var [roleIdx, setRoleIdx] = useState(0);
-  var [text, setText] = useState("");
-  var [typing, setTyping] = useState(true);
-
-  useEffect(function() {
-    var role = roles[roleIdx];
-    var i = 0;
-    var timer;
-    if (typing) {
-      timer = setInterval(function() {
-        setText(role.slice(0, i + 1));
-        i++;
-        if (i === role.length) {
-          clearInterval(timer);
-          setTimeout(function() { setTyping(false); }, 2000);
-        }
-      }, 70);
-    } else {
-      timer = setInterval(function() {
-        setText(function(prev) {
-          if (prev.length <= 1) {
-            clearInterval(timer);
-            setRoleIdx(function(idx) { return (idx + 1) % roles.length; });
-            setTyping(true);
-            return "";
-          }
-          return prev.slice(0, prev.length - 1);
-        });
-      }, 35);
-    }
-    return function() { clearInterval(timer); };
-  }, [roleIdx, typing]);
-
   var letters = "HUMAIS ALI".split("");
 
   return (
@@ -87,15 +55,18 @@ export default function Hero() {
           })}
         </div>
 
-        {/* Typing role */}
+        {/* Morphing role */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-lg sm:text-2xl md:text-3xl font-light text-[#8B949E] mb-3 h-9 sm:h-10"
+          className="mb-3 h-9 sm:h-10"
         >
-          <span className="text-[#00D4FF] font-mono font-medium">{text}</span>
-          <span className="blink text-[#0A84FF] ml-0.5">|</span>
+          <MorphText 
+            words={roles}
+            textClassName="text-lg sm:text-2xl md:text-3xl font-mono text-[#00D4FF]"
+            fontFamily="inherit"
+          />
         </motion.div>
 
         {/* Available badge */}
