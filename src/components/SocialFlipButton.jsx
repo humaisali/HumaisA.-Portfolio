@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import {
     FaGithub,
     FaTwitter,
-    FaFacebook,
     FaInstagram,
     FaLinkedin,
     FaEnvelope,
     FaDiscord,
 } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 
 import { personalInfo } from "../data/index";
 
@@ -21,7 +21,7 @@ const defaultItems = [
     { letter: "O", icon: <FaTwitter />, label: "Twitter", href: "https://twitter.com/i_humais" },
     { letter: "N", icon: <FaLinkedin />, label: "LinkedIn", href: personalInfo.linkedin },
     { letter: "T", icon: <FaInstagram />, label: "Instagram", href: "https://www.instagram.com/localhost.5173/" },
-    { letter: "A", icon: <FaFacebook />, label: "Facebook", href: "https://www.facebook.com/share/197oUutwDT/" },
+    { letter: "A", icon: <SiLeetcode />, label: "LeetCode", href: personalInfo.leetcode },
     { letter: "C", icon: <FaEnvelope />, label: "Email", href: `mailto:${personalInfo.email}` },
     { letter: "T", icon: <FaDiscord />, label: "Discord", href: "https://discord.com/users/humais_ali" },
 ];
