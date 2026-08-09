@@ -6,11 +6,13 @@ import { personalInfo } from "../data/index";
 import VengeanceButton from "./VengeanceButton";
 import SocialFlipButton from "./SocialFlipButton";
 import MorphText from "./MorphText";
-import FlipText from "./FlipText";
+import StaggerText from "./StaggerText";
 
 var roles = personalInfo.roles;
 
 export default function Hero() {
+  var letters = "HUMAIS ALI".split("");
+
   return (
     <section
       id="hero"
@@ -34,10 +36,24 @@ export default function Hero() {
       <div className="relative z-10 w-full px-4 mx-auto text-center max-w-7xl sm:px-6 lg:px-12">
 
         {/* Name — staggered letters */}
-        <div className="flex flex-wrap items-center justify-center mb-4" style={{ fontSize: "clamp(2.2rem, 8.5vw, 7rem)" }}>
-          <FlipText className="font-black leading-none tracking-tighter text-white">
-            HUMAIS ALI
-          </FlipText>
+        <div className="flex flex-wrap items-center justify-center mb-4">
+          {letters.map(function(letter, i) {
+            return (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 80, rotateX: -90 }}
+                animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="font-black leading-none tracking-tighter text-white"
+                style={{
+                  display: "inline-block",
+                  fontSize: "clamp(2.2rem, 8.5vw, 7rem)",
+                }}
+              >
+                {letter === " " ? "\u00A0" : letter}
+              </motion.span>
+            );
+          })}
         </div>
 
         {/* Morphing role */}
@@ -68,14 +84,11 @@ export default function Hero() {
         </motion.div>
 
         {/* Bio */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0, duration: 0.6 }}
-          className="text-[#8B949E] text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed"
-        >
-          {personalInfo.bio}
-        </motion.p>
+        <div className="text-[#8B949E] text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-light">
+          <StaggerText delay={1.0} divideBy="word">
+            {personalInfo.bio}
+          </StaggerText>
+        </div>
 
         {/* CTA Buttons */}
         <motion.div

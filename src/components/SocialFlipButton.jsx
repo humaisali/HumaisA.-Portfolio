@@ -18,10 +18,10 @@ function cn(...classes) {
 
 const defaultItems = [
     { letter: "C", icon: <FaGithub />, label: "Github", href: personalInfo.github },
-    { letter: "O", icon: <FaTwitter />, label: "Twitter", href: "https://twitter.com/i_humais" },
-    { letter: "N", icon: <FaLinkedin />, label: "LinkedIn", href: personalInfo.linkedin },
+    { letter: "O", icon: <FaLinkedin />, label: "LinkedIn", href: personalInfo.linkedin },
+    { letter: "N", icon: <SiLeetcode />, label: "LeetCode", href: personalInfo.leetcode },
     { letter: "T", icon: <FaInstagram />, label: "Instagram", href: "https://www.instagram.com/localhost.5173/" },
-    { letter: "A", icon: <SiLeetcode />, label: "LeetCode", href: personalInfo.leetcode },
+    { letter: "A", icon: <FaTwitter />, label: "Twitter", href: "https://twitter.com/i_humais" },
     { letter: "C", icon: <FaEnvelope />, label: "Email", href: `mailto:${personalInfo.email}` },
     { letter: "T", icon: <FaDiscord />, label: "Discord", href: "https://discord.com/users/humais_ali" },
 ];
