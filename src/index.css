@@ -118,3 +118,7 @@ body {
 .chatbot-messages::-webkit-scrollbar { width: 3px; }
 .chatbot-messages::-webkit-scrollbar-track { background: transparent; }
 .chatbot-messages::-webkit-scrollbar-thumb { background: #30363D; border-radius: 10px; }
+
+/* VengeanceButton — full-width on mobile */
+.vb-fullwidth { width: 100%; }
+@media (min-width: 640px) { .vb-fullwidth { width: auto; } }
