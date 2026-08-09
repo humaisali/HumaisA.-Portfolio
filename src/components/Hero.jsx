@@ -4,6 +4,7 @@ import { FiGithub, FiLinkedin, FiArrowDown } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
 import { personalInfo } from "../data/index";
 import VengeanceButton from "./VengeanceButton";
+import SocialFlipButton from "./SocialFlipButton";
 
 var roles = personalInfo.roles;
 
@@ -135,13 +136,6 @@ export default function Hero() {
             View Projects
           </VengeanceButton>
           <VengeanceButton
-            href="#contact"
-            variant="secondary"
-            fullWidth
-          >
-            Let's Talk
-          </VengeanceButton>
-          <VengeanceButton
             href="/Humais-Resume.pdf"
             download
             variant="outline"
@@ -151,35 +145,14 @@ export default function Hero() {
           </VengeanceButton>
         </motion.div>
 
-        {/* Social Links */}
+        {/* Social Links Mega Button */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="flex flex-wrap items-center justify-center gap-4 sm:gap-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="flex justify-center"
         >
-          {[
-            { icon: FiGithub,   href: personalInfo.github,   label: "GitHub" },
-            { icon: FiLinkedin, href: personalInfo.linkedin,  label: "LinkedIn" },
-            { icon: SiLeetcode, href: personalInfo.leetcode,  label: "LeetCode" },
-          ].map(function(s) {
-            var Icon = s.icon;
-            return (
-              <motion.a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ scale: 1.2 }}
-                className="text-[#8B949E] hover:text-[#0A84FF] transition-all duration-200"
-                aria-label={s.label}
-              >
-                <Icon size={20} />
-              </motion.a>
-            );
-          })}
-          <div className="w-px h-5 bg-[#30363D]" />
-          <span className="text-[#8B949E] text-xs sm:text-sm font-mono">{personalInfo.location}</span>
+          <SocialFlipButton />
         </motion.div>
       </div>
 
