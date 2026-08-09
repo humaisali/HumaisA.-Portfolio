@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiArrowDown } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
 import { personalInfo } from "../data/index";
+import VengeanceButton from "./VengeanceButton";
 
 var roles = personalInfo.roles;
 
@@ -126,31 +127,28 @@ export default function Hero() {
           transition={{ delay: 1.1, duration: 0.6 }}
           className="flex flex-col flex-wrap items-center justify-center gap-3 mb-10 sm:flex-row"
         >
-          <motion.a
+          <VengeanceButton
             href="#projects"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="w-full sm:w-auto px-7 py-3 rounded-md text-white font-semibold bg-[#0A84FF] hover:bg-[#0066CC] transition-colors duration-200 text-center text-sm sm:text-base"
+            variant="primary"
+            fullWidth
           >
             View Projects
-          </motion.a>
-          <motion.a
+          </VengeanceButton>
+          <VengeanceButton
             href="#contact"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="w-full sm:w-auto px-7 py-3 rounded-md font-semibold text-white glass border border-[#30363D] hover:border-[#0A84FF]/50 transition-all duration-200 text-center text-sm sm:text-base"
+            variant="secondary"
+            fullWidth
           >
             Let's Talk
-          </motion.a>
-          <motion.a
+          </VengeanceButton>
+          <VengeanceButton
             href="/Humais-Resume.pdf"
             download
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="w-full sm:w-auto px-7 py-3 rounded-md font-semibold text-[#0A84FF] border border-[#0A84FF]/40 hover:bg-[#0A84FF]/5 transition-all duration-200 text-center text-sm sm:text-base"
+            variant="outline"
+            fullWidth
           >
             Download CV
-          </motion.a>
+          </VengeanceButton>
         </motion.div>
 
         {/* Social Links */}

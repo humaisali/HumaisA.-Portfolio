@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX } from "react-icons/fi";
+import VengeanceButton from "./VengeanceButton";
 
 var LINKS = [
   { label: "About",      href: "about" },
@@ -101,14 +102,14 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          <motion.button
-            onClick={function() { scrollToSection("contact"); }}
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="hidden md:flex items-center px-4 py-2 rounded-md bg-[#0A84FF] text-white text-sm font-semibold hover:bg-[#0066CC] transition-colors duration-200 border-none cursor-pointer"
-          >
-            Hire Me
-          </motion.button>
+          <div className="hidden md:block">
+            <VengeanceButton
+              onClick={function() { scrollToSection("contact"); }}
+              size="sm"
+            >
+              Hire Me
+            </VengeanceButton>
+          </div>
           <button
             className="md:hidden text-[#8B949E] hover:text-white transition-colors p-1 bg-transparent border-none cursor-pointer"
             onClick={function() { setOpen(function(p) { return !p; }); }}
@@ -150,16 +151,13 @@ export default function Navbar() {
                 );
               })}
               <li className="pt-2 mt-1 border-t border-[#30363D]/50">
-                <a
-                  href="#contact"
-                  onClick={function(e) {
-                    e.preventDefault();
-                    scrollToSection("contact");
-                  }}
-                  className="block w-full text-center px-5 py-2.5 bg-[#0A84FF] text-white rounded-md text-sm font-semibold hover:bg-[#0066CC] transition-colors"
+                <VengeanceButton
+                  onClick={function() { scrollToSection("contact"); }}
+                  fullWidth
+                  size="sm"
                 >
                   Hire Me
-                </a>
+                </VengeanceButton>
               </li>
             </ul>
           </motion.div>

@@ -283,33 +283,163 @@ export default function PortfolioChatBot() {
 
   return (
     <>
-      {/* ── Floating toggle button ── */}
-      <motion.button
+      {/* ── Floating toggle button — VengeanceButton style ── */}
+      <style>{`
+        .chatbot-toggle {
+          --highlight-hue: 210deg;
+          position: fixed;
+          bottom: 1.5rem;
+          right: 1.25rem;
+          z-index: 200;
+          width: 52px;
+          height: 52px;
+          border-radius: 16px;
+          background-color: #101010;
+          border: solid 1px rgba(10, 132, 255, 0.2);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #e8e8e8;
+          padding: 0;
+
+          box-shadow:
+            inset 0px 1px 1px rgba(10, 132, 255, 0.2),
+            inset 0px 2px 2px rgba(10, 132, 255, 0.15),
+            inset 0px 4px 4px rgba(10, 132, 255, 0.1),
+            inset 0px 8px 8px rgba(10, 132, 255, 0.05),
+            inset 0px 16px 16px rgba(10, 132, 255, 0.05),
+            0px -1px 1px rgba(0, 0, 0, 0.02),
+            0px -2px 2px rgba(0, 0, 0, 0.03),
+            0px -4px 4px rgba(0, 0, 0, 0.05),
+            0px -8px 8px rgba(0, 0, 0, 0.06),
+            0px -16px 16px rgba(0, 0, 0, 0.08);
+
+          transition: box-shadow 0.4s, border 0.4s, background-color 0.4s;
+        }
+        @media (min-width: 640px) {
+          .chatbot-toggle {
+            bottom: 2rem;
+            right: 2rem;
+          }
+        }
+
+        .chatbot-toggle::before {
+          content: "";
+          position: absolute;
+          top: -4px;
+          left: -4px;
+          width: calc(100% + 8px);
+          height: calc(100% + 8px);
+          border-radius: 20px;
+          pointer-events: none;
+          background-image: linear-gradient(0deg, rgba(0,0,0,0.267), rgba(0,0,0,0.667));
+          z-index: -1;
+          transition: box-shadow 0.4s;
+          box-shadow: 0 -8px 8px -6px rgba(0,0,0,0) inset,
+            0 -16px 16px -8px rgba(0,0,0,0) inset,
+            1px 1px 1px rgba(10, 132, 255, 0.133),
+            2px 2px 2px rgba(10, 132, 255, 0.067),
+            -1px -1px 1px rgba(0,0,0,0.133),
+            -2px -2px 2px rgba(0,0,0,0.067);
+        }
+
+        .chatbot-toggle::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border-radius: inherit;
+          pointer-events: none;
+          background-image: linear-gradient(
+            0deg,
+            #fff,
+            hsl(var(--highlight-hue), 100%, 70%),
+            hsla(var(--highlight-hue), 100%, 70%, 50%),
+            8%,
+            transparent
+          );
+          opacity: 0;
+          transition: opacity 0.4s;
+        }
+
+        .chatbot-toggle:hover {
+          border: solid 1px hsla(var(--highlight-hue), 100%, 80%, 40%);
+        }
+        .chatbot-toggle:hover::before {
+          box-shadow: 0 -8px 8px -6px rgba(10, 132, 255, 0.667) inset,
+            0 -16px 16px -8px hsla(var(--highlight-hue), 100%, 70%, 30%) inset,
+            1px 1px 1px rgba(10, 132, 255, 0.133),
+            2px 2px 2px rgba(10, 132, 255, 0.067),
+            -1px -1px 1px rgba(0,0,0,0.133),
+            -2px -2px 2px rgba(0,0,0,0.067);
+        }
+        .chatbot-toggle:hover::after {
+          opacity: 1;
+          mask-image: linear-gradient(0deg, #fff, transparent);
+        }
+        .chatbot-toggle:hover .chatbot-toggle-icon {
+          color: #fff;
+          filter: drop-shadow(0 0 3px hsl(var(--highlight-hue), 100%, 70%));
+        }
+
+        .chatbot-toggle:active {
+          border: solid 1px hsla(var(--highlight-hue), 100%, 80%, 70%);
+          background-color: hsla(var(--highlight-hue), 50%, 20%, 0.5);
+        }
+        .chatbot-toggle:active::before {
+          box-shadow: 0 -8px 12px -6px rgba(10, 132, 255, 0.667) inset,
+            0 -16px 16px -8px hsla(var(--highlight-hue), 100%, 70%, 80%) inset,
+            1px 1px 1px rgba(10, 132, 255, 0.267),
+            2px 2px 2px rgba(10, 132, 255, 0.133),
+            -1px -1px 1px rgba(0,0,0,0.133),
+            -2px -2px 2px rgba(0,0,0,0.067);
+        }
+        .chatbot-toggle:active::after {
+          opacity: 1;
+          mask-image: linear-gradient(0deg, #fff, transparent);
+          filter: brightness(200%);
+        }
+
+        .chatbot-toggle-icon {
+          color: rgba(255,255,255,0.7);
+          filter: drop-shadow(0 0 2px rgba(10, 132, 255, 0.6));
+          transition: color 0.4s, filter 0.4s;
+        }
+
+        .chatbot-toggle-pulse {
+          position: absolute;
+          inset: 0;
+          border-radius: 16px;
+          border: 2px solid rgba(10, 132, 255, 0.5);
+          pointer-events: none;
+        }
+      `}</style>
+      <button
         onClick={function() { setOpen(function(p) { return !p; }); }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-6 right-5 sm:bottom-8 sm:right-8 z-[200] rounded-full bg-[#0A84FF] text-white shadow-lg shadow-[#0A84FF]/30 flex items-center justify-center border-none cursor-pointer"
-        style={{ width: "52px", height: "52px" }}
+        className="chatbot-toggle"
         aria-label="Open chat"
       >
         <AnimatePresence mode="wait">
           {open
-            ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
+            ? <motion.span key="x" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }} className="chatbot-toggle-icon">
                 <FiX size={22} />
               </motion.span>
-            : <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
+            : <motion.span key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }} className="chatbot-toggle-icon">
                 <FiMessageSquare size={20} />
               </motion.span>
           }
         </AnimatePresence>
         {!open && (
           <motion.span
-            className="absolute inset-0 rounded-full border-2 border-[#0A84FF]"
+            className="chatbot-toggle-pulse"
             animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
             transition={{ duration: 1.8, repeat: Infinity }}
           />
         )}
-      </motion.button>
+      </button>
 
       {/* ── Chat window ── */}
       <AnimatePresence>
