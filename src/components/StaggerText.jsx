@@ -26,19 +26,21 @@ const StaggerText = ({
   delay = 0,
   divideBy = "word",
 }) => {
-  let content = children;
-  if (typeof content !== "string") {
-    if (typeof content === "number" || typeof content === "boolean") {
-      content = String(content);
-    } else {
-      console.warn("StaggerText only supports plain text/string children.");
-      return <>{content}</>;
-    }
-  }
-
-  const text = content;
-  const parts = divideBy === "letter" ? text.split("") : text.split(" ");
   const stagger = divideBy === "letter" ? 0.02 : 0.05;
+
+  const parts = [];
+  React.Children.toArray(children).forEach(child => {
+    if (typeof child === "string" || typeof child === "number") {
+      const text = String(child);
+      const splitParts = divideBy === "letter" ? text.split("") : text.split(" ");
+      
+      splitParts.forEach((part) => {
+        parts.push({ type: "text", content: part });
+      });
+    } else {
+      parts.push({ type: "node", content: child });
+    }
+  });
 
   return (
     <motion.span
@@ -58,11 +60,11 @@ const StaggerText = ({
             variants={item}
             className="inline-block will-change-transform"
           >
-            {divideBy === "letter"
-              ? part === " "
-                ? "\u00A0"
-                : part
-              : part + "\u00A0"}
+            {part.type === "text"
+              ? (divideBy === "letter"
+                  ? (part.content === " " ? "\u00A0" : part.content)
+                  : part.content + "\u00A0")
+              : part.content}
           </motion.span>
         </span>
       ))}

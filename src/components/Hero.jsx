@@ -7,6 +7,7 @@ import VengeanceButton from "./VengeanceButton";
 import SocialFlipButton from "./SocialFlipButton";
 import MorphText from "./MorphText";
 import StaggerText from "./StaggerText";
+import CursorCard from "./CursorCard";
 
 var roles = personalInfo.roles;
 
@@ -37,7 +38,7 @@ export default function Hero() {
 
         {/* Name — staggered letters */}
         <div className="flex flex-wrap items-center justify-center mb-4">
-          {letters.map(function(letter, i) {
+          {letters.map(function (letter, i) {
             return (
               <motion.span
                 key={i}
@@ -63,15 +64,15 @@ export default function Hero() {
           transition={{ delay: 0.8 }}
           className="mb-3 h-9 sm:h-10"
         >
-          <MorphText 
+          <MorphText
             words={roles}
-            textClassName="text-lg sm:text-2xl md:text-3xl font-mono text-[#00D4FF]"
+            textClassName="text-lg sm:text-2xl md:text-3xl font-mono text-[#0A84FF]"
             fontFamily="inherit"
           />
         </motion.div>
 
         {/* Available badge */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
@@ -81,12 +82,27 @@ export default function Hero() {
             <span className="flex-shrink-0 w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             <span className="text-xs sm:text-sm text-[#8B949E] font-mono">Available for opportunities</span>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Bio */}
         <div className="text-[#8B949E] text-sm sm:text-base lg:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed font-light">
           <StaggerText delay={1.0} divideBy="word">
-            {personalInfo.bio}
+            <CursorCard
+              image="/UET_Mardan.jpg"
+              description="University of Engineering and Technology, Mardan"
+              href="https://www.uetmardan.edu.pk/uetm/Department/softwaredept"
+            >
+              Software Engineering student at UET Mardan
+            </CursorCard>
+            {""}with a passion for merging AI with modern web applications. I build fast, intelligent, and beautiful digital products at{""}
+            <CursorCard
+              image="/skytech.png"
+              description="SkyTech Developers"
+              href="https://skytech-developers.vercel.app/"
+            >
+              SkyTech Developers
+            </CursorCard>
+            .
           </StaggerText>
         </div>
 
