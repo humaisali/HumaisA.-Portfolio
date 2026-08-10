@@ -2,9 +2,9 @@ import { image } from "framer-motion/client";
 
 export const personalInfo = {
   name: "Humais Ali",
-  roles: ["Full Stack Developer", "AI Engineer", "MERN Stack Dev", "Problem Solver"],
+  roles: ["MERN Stack Developer", "Machine Learning Intern", "AI Engineer", "Problem Solver"],
   tagline: "Building AI-Powered Web Experiences",
-  bio: "Software Engineering student at UET Mardan with a passion for merging AI with modern web applications. I build fast, intelligent, and beautiful digital products at SkyTech Developers.",
+  bio: "Software Engineer and Co-Founder at SkyTech Developers, pursuing a BSc in Computer Software Engineering at UET Mardan. Builds full-stack, AI-integrated web apps with React, Node.js, Express, and MongoDB. Currently expanding into applied AI as a Machine Learning Intern at FlyRank AI.",
   location: "Mardan, Pakistan",
   email: "humaisali.uetm282@gmail.com",
   university: "UET Mardan",
@@ -25,17 +25,20 @@ export const stats = [
 
 export const skills = [
   { name: "React.js",     level: 85, category: "Frontend" },
-  { name: "Next.js",      level: 70, category: "Frontend" },
+  { name: "JavaScript/TS",level: 85, category: "Frontend" },
   { name: "Tailwind CSS", level: 90, category: "Frontend" },
-  { name: "JavaScript",   level: 85, category: "Frontend" },
+  { name: "Next.js",      level: 70, category: "Frontend" },
   { name: "Node.js",      level: 80, category: "Backend" },
   { name: "Express.js",   level: 80, category: "Backend" },
+  { name: "REST APIs",    level: 85, category: "Backend" },
   { name: "Python",       level: 70, category: "Backend" },
   { name: "MongoDB",      level: 75, category: "Database" },
+  { name: "PostgreSQL",   level: 70, category: "Database" },
   { name: "MySQL",        level: 75, category: "Database" },
   { name: "Gemini AI",    level: 85, category: "AI/ML" },
-  { name: "TensorFlow",   level: 50, category: "AI/ML" },
+  { name: "ML Basics",    level: 60, category: "AI/ML" },
   { name: "Git & GitHub", level: 85, category: "Tools" },
+  { name: "AWS & Vercel", level: 75, category: "Tools" },
 ];
 
 export const techIcons = [
@@ -45,20 +48,38 @@ export const techIcons = [
 
 export const experience = [
   {
-    role: "Full Stack Developer",
-    company: "SkyTech Developers",
-    period: "2024 - Present",
-    type: "Freelance",
+    role: "Machine Learning Intern",
+    company: "FlyRank AI",
+    period: "Jul 2026 - Present",
+    type: "Internship",
     color: "#0A84FF",
-    description: "Building full-stack web apps and AI-powered tools for clients. Handling everything from UI design to backend APIs and AI integrations.",
-    techs: ["React", "Node.js", "Tailwind", "MongoDB", "Gemini AI"],
+    description: "Building a reproducible pipeline (data prep, baseline modeling, training, evaluation) on real anonymized Google Search data using Python, pandas, and scikit-learn in Colab. Progressing toward a capstone in embeddings, clustering, and intent classification.",
+    techs: ["Python", "Pandas", "Scikit-Learn", "Machine Learning"],
+  },
+  {
+    role: "MERN Stack Developer",
+    company: "SkyTech Developers",
+    period: "Feb 2025 - Present",
+    type: "Freelance",
+    color: "#00D4FF",
+    description: "Lead full-stack development using the MERN stack. Deliver backend systems, REST APIs, and JWT-secured, role-based architectures for global clients. Own the company's technical direction.",
+    techs: ["React", "Node.js", "TypeScript", "PostgreSQL", "MongoDB"],
+  },
+  {
+    role: "Web Development Intern",
+    company: "Qwetrum Technologies",
+    period: "Jun 2026 - Jul 2026",
+    type: "Internship",
+    color: "#8B949E",
+    description: "Gained hands-on experience contributing to real-world software development projects in a professional team environment.",
+    techs: ["React", "JavaScript", "HTML/CSS"],
   },
   {
     role: "B.Sc. Software Engineering",
     company: "UET Mardan",
-    period: "2022 - Present",
+    period: "Sep 2023 - Present",
     type: "University",
-    color: "#00D4FF",
+    color: "#0A84FF",
     description: "6th semester student studying DSA, Machine Learning, Web Engineering, Software Project Management, and Software Quality Engineering.",
     techs: ["DSA", "Machine Learning", "Web Engineering", "Databases", "OOP"],
   },

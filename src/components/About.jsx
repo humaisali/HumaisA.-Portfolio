@@ -45,12 +45,10 @@ export default function About() {
                 working at the intersection of artificial intelligence and modern web development.
               </p>
               <p className="text-[#8B949E] leading-relaxed mb-4 text-sm sm:text-base">
-                At SkyTech Developers, I've built and shipped multiple AI-powered full-stack applications -
-                from code explainers to career coaching tools - all using React, Node.js, and Google's Gemini API.
+                At SkyTech Developers, I lead full-stack development, delivering robust backend systems, REST APIs, and secure, role-based architectures for global clients using the MERN stack and PostgreSQL.
               </p>
               <p className="text-[#8B949E] leading-relaxed mb-8 text-sm sm:text-base">
-                When I'm not building, I'm grinding DSA on LeetCode, exploring ML research, or
-                helping clients bring their digital ideas to life.
+                Currently, I am expanding into applied AI as a <strong>Machine Learning Intern at FlyRank AI</strong>, focusing on data pipelines and clustering. When I'm not building, I'm grinding DSA on LeetCode or exploring ML research.
               </p>
               <div className="inline-flex items-center gap-3 px-4 sm:px-5 py-3 rounded-md glass border border-[#0A84FF]/20">
                 <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
