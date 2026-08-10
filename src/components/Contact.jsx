@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FiMail, FiMapPin, FiLinkedin, FiGithub, FiSend, FiArrowUpRight } from "react-icons/fi";
 import { personalInfo } from "../data/index";
+import StaggerText from "./StaggerText";
 
 export default function Contact() {
   var [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
@@ -61,7 +62,9 @@ export default function Contact() {
                 Let's create something <span className="gradient-text">amazing</span>
               </h3>
               <p className="text-[#8B949E] leading-relaxed text-sm">
-                I'm open to internships, freelance projects, collaborations, and interesting conversations about AI and web development.
+                <StaggerText delay={0.2} divideBy="word">
+                  I'm open to internships, freelance projects, collaborations, and interesting conversations about AI and web development.
+                </StaggerText>
               </p>
             </div>
 

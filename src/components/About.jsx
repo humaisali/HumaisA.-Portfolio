@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FiCode, FiCpu, FiMapPin, FiBookOpen, FiZap } from "react-icons/fi";
 import { personalInfo } from "../data/index";
+import StaggerText from "./StaggerText";
 
 export default function About() {
   return (
@@ -41,14 +42,20 @@ export default function About() {
                 <span className="gradient-text">AI + Web Technology</span>
               </h3>
               <p className="text-[#8B949E] leading-relaxed mb-4 text-sm sm:text-base">
-                I'm a {personalInfo.semester} Software Engineering student at {personalInfo.university},
-                working at the intersection of artificial intelligence and modern web development.
+                <StaggerText delay={0.2} divideBy="word">
+                  I'm a {personalInfo.semester} Software Engineering student at {personalInfo.university},
+                  working at the intersection of artificial intelligence and modern web development.
+                </StaggerText>
               </p>
               <p className="text-[#8B949E] leading-relaxed mb-4 text-sm sm:text-base">
-                At SkyTech Developers, I lead full-stack development, delivering robust backend systems, REST APIs, and secure, role-based architectures for global clients using the MERN stack and PostgreSQL.
+                <StaggerText delay={1.2} divideBy="word">
+                  At SkyTech Developers, I lead full-stack development, delivering robust backend systems, REST APIs, and secure, role-based architectures for global clients using the MERN stack and PostgreSQL.
+                </StaggerText>
               </p>
               <p className="text-[#8B949E] leading-relaxed mb-8 text-sm sm:text-base">
-                Currently, I am expanding into applied AI as a <strong>Machine Learning Intern at FlyRank AI</strong>, focusing on data pipelines and clustering. When I'm not building, I'm grinding DSA on LeetCode or exploring ML research.
+                <StaggerText delay={2.5} divideBy="word">
+                  Currently, I am expanding into applied AI as a <strong>Machine Learning Intern at FlyRank AI</strong>, focusing on data pipelines and clustering. When I'm not building, I'm grinding DSA on LeetCode or exploring ML research.
+                </StaggerText>
               </p>
               <div className="inline-flex items-center gap-3 px-4 sm:px-5 py-3 rounded-md glass border border-[#0A84FF]/20">
                 <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse flex-shrink-0" />
