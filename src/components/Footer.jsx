@@ -34,7 +34,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <span className="text-xl sm:text-2xl font-black text-white">
-              Humais.Softneer<span className="text-[#0A84FF]">.</span>
+              Engineer.Humais<span className="text-[#0A84FF]">.</span>
             </span>
             <p className="text-[#8B949E] text-sm mt-3 leading-relaxed max-w-xs">
               Full Stack Developer & AI Engineer based in Mardan, Pakistan.

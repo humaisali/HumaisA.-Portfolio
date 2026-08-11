@@ -50,24 +50,29 @@ const StaggerText = ({
       viewport={{ once: true }}
       style={{ display: "inline-block" }}
     >
-      {parts.map((part, i) => (
-        <span
-          key={i}
-          className="inline-block overflow-hidden relative"
-          style={{ verticalAlign: "top" }}
-        >
-          <motion.span
-            variants={item}
-            className="inline-block will-change-transform"
+      {parts.map((part, i) => {
+        if (part.type === "node" && part.content && part.content.type === 'br') {
+          return <br key={i} />;
+        }
+        return (
+          <span
+            key={i}
+            className="inline-block overflow-hidden relative"
+            style={{ verticalAlign: "top" }}
           >
-            {part.type === "text"
-              ? (divideBy === "letter"
-                  ? (part.content === " " ? "\u00A0" : part.content)
-                  : part.content + "\u00A0")
-              : part.content}
-          </motion.span>
-        </span>
-      ))}
+            <motion.span
+              variants={item}
+              className="inline-block will-change-transform"
+            >
+              {part.type === "text"
+                ? (divideBy === "letter"
+                    ? (part.content === " " ? "\u00A0" : part.content)
+                    : part.content + "\u00A0")
+                : part.content}
+            </motion.span>
+          </span>
+        );
+      })}
     </motion.span>
   );
 };
