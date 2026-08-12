@@ -40,18 +40,18 @@ export default function About() {
 
             <h3 className="mb-6 text-lg font-bold tracking-wide uppercase">Personal Info</h3>
 
-            <div className="grid grid-cols-1 gap-4 mb-10 sm:grid-cols-2 sm:gap-2">
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Name :</span> <span className="font-medium text-white">{personalInfo.name}</span></div>
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Address :</span> <span className="font-medium text-white">{personalInfo.location}</span></div>
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Age :</span> <span className="font-medium text-white">22 Years</span></div>
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Phone :</span> <span className="font-medium text-white">+923469901771</span></div>
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Nationality :</span> <span className="font-medium text-white">Pakistani</span></div>
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Email :</span> <span className="font-medium text-white">{personalInfo.email}</span></div>
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Freelance :</span> <span className="font-medium text-white">Available</span></div>
-              <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Languages :</span> <span className="font-medium text-white">English, Urdu, Pashto</span></div>
+            <div className="grid grid-cols-2 gap-y-6 gap-x-2 mb-10 sm:gap-y-2 sm:gap-x-2">
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Name:</span> <span className="font-medium text-white">{personalInfo.name}</span></div>
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Address:</span> <span className="font-medium text-white">{personalInfo.location}</span></div>
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Age:</span> <span className="font-medium text-white">22 Years</span></div>
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Phone:</span> <span className="font-medium text-white">+923469901771</span></div>
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Nationality:</span> <span className="font-medium text-white">Pakistani</span></div>
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Email:</span> <span className="font-medium text-white break-all">{personalInfo.email}</span></div>
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Freelance:</span> <span className="font-medium text-white">Available</span></div>
+              <div className="flex flex-col sm:flex-row text-[13px] sm:text-base"><span className="text-[#8B949E] sm:w-24 flex-shrink-0 mb-0.5 sm:mb-0">Languages:</span> <span className="font-medium text-white">English, Urdu, Pashto</span></div>
             </div>
 
-            <div>
+            <div className="flex justify-center lg:justify-start">
               <VengeanceButton href="/Humais-Resume.pdf" download variant="outline">
                 Download CV
               </VengeanceButton>

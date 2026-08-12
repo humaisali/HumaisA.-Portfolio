@@ -44,7 +44,7 @@ const SocialFlipNode = ({
     return (
         <Wrapper
             {...wrapperProps}
-            className={cn("relative h-10 w-10 cursor-pointer", itemClassName)}
+            className={cn("relative h-8 w-8 sm:h-10 sm:w-10 cursor-pointer flex-shrink-0", itemClassName)}
             style={{ perspective: "1000px" }}
             onMouseEnter={() => setTooltipIndex(index)}
             onMouseLeave={() => setTooltipIndex(null)}
@@ -81,7 +81,7 @@ const SocialFlipNode = ({
                 {/* Front - Letter */}
                 <div
                     className={cn(
-                        "absolute inset-0 flex items-center justify-center rounded-lg text-lg font-bold text-white",
+                        "absolute inset-0 flex items-center justify-center rounded-lg text-[13px] sm:text-lg font-bold text-white",
                         frontClassName
                     )}
                     style={{ 
@@ -105,7 +105,7 @@ const SocialFlipNode = ({
                 {/* Back - Icon */}
                 <div
                     className={cn(
-                        "absolute inset-0 flex items-center justify-center rounded-lg bg-[#0A84FF] text-lg text-white shadow-[0_0_15px_rgba(10,132,255,0.5)]",
+                        "absolute inset-0 flex items-center justify-center rounded-lg bg-[#0A84FF] text-[14px] sm:text-lg text-white shadow-[0_0_15px_rgba(10,132,255,0.5)]",
                         backClassName
                     )}
                     style={{
@@ -131,9 +131,9 @@ export default function SocialFlipButton({
     const [tooltipIndex, setTooltipIndex] = useState(null);
 
     return (
-        <div className={cn("flex items-center justify-center gap-4 p-4", className)}>
+        <div className={cn("flex items-center justify-center gap-2 sm:gap-4 p-2 sm:p-4 w-full", className)}>
             <div
-                className="group relative flex items-center justify-center gap-2 rounded-2xl p-4 shadow-2xl"
+                className="group relative flex items-center justify-center gap-1 sm:gap-2 rounded-2xl p-2 sm:p-4 shadow-2xl max-w-full overflow-hidden"
                 style={{
                     backgroundColor: "#101010",
                     border: "1px solid rgba(10, 132, 255, 0.2)",

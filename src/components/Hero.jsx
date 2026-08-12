@@ -249,12 +249,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
-          className="flex flex-col flex-wrap items-center justify-center gap-3 mb-10 sm:flex-row"
+          className="flex flex-row flex-wrap items-center justify-center gap-3 mb-10"
         >
           <VengeanceButton
             href="#projects"
             variant="primary"
-            fullWidth
           >
             View Projects
           </VengeanceButton>
@@ -262,7 +261,6 @@ export default function Hero() {
             href="/Humais-Resume.pdf"
             download
             variant="outline"
-            fullWidth
           >
             Download CV
           </VengeanceButton>

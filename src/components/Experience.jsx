@@ -31,22 +31,22 @@ export default function Experience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="flex flex-row items-stretch gap-4 sm:gap-6 h-full"
+                className="flex flex-row items-stretch gap-3 sm:gap-6 h-full"
               >
-                {/* Left side: Huge faded year and date range */}
-                <div className="w-1/3 flex flex-col justify-center items-end text-right flex-shrink-0">
-                  <div className="text-5xl sm:text-6xl lg:text-7xl font-black text-[#8B949E]/20 leading-none tracking-tighter">
+                {/* Left side: Faded year and date range */}
+                <div className="w-[70px] sm:w-1/3 flex flex-col justify-center items-end text-right flex-shrink-0">
+                  <div className="text-3xl sm:text-6xl lg:text-7xl font-black text-[#8B949E]/30 sm:text-[#8B949E]/20 leading-none tracking-tighter">
                     {startYear}
                   </div>
-                  <div className="text-[#8B949E] text-[10px] sm:text-xs font-mono mt-2 sm:mt-3 font-semibold">
+                  <div className="text-[#8B949E] text-[9px] sm:text-xs font-mono mt-1.5 sm:mt-3 font-semibold leading-tight">
                     {item.period}
                   </div>
                 </div>
 
                 {/* Right side: Dark glass card */}
-                <div className="w-2/3 glass grad-border rounded-xl p-5 sm:p-6 flex flex-col h-full">
-                  <h3 className="text-white font-bold text-base sm:text-lg mb-1">{item.role}</h3>
-                  <p className="font-semibold text-xs sm:text-sm mb-3 text-[#0A84FF]">{item.company}</p>
+                <div className="flex-1 glass grad-border rounded-xl p-4 sm:p-6 flex flex-col h-full relative z-10">
+                  <h3 className="text-white font-bold text-[13px] sm:text-lg mb-1">{item.role}</h3>
+                  <p className="font-semibold text-[11px] sm:text-sm mb-2 sm:mb-3 text-[#0A84FF]">{item.company}</p>
                   <p className="text-[#8B949E] text-xs sm:text-sm leading-relaxed">
                     {item.description}
                   </p>

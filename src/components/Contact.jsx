@@ -68,19 +68,19 @@ export default function Contact() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {/* Email - Full Width */}
               <div 
                 onClick={handleCopyEmail}
-                className="col-span-2 group relative overflow-hidden p-6 rounded-2xl glass glass-hover cursor-pointer flex flex-col justify-center"
+                className="col-span-2 group relative overflow-hidden p-5 sm:p-6 rounded-2xl glass glass-hover cursor-pointer flex flex-col justify-center"
               >
                 <FiMail className="absolute -right-4 -bottom-4 text-[100px] text-[#0A84FF]/5 group-hover:text-[#0A84FF]/10 transition-colors duration-500 transform group-hover:scale-110" />
                 <div className="relative z-10 flex items-center justify-between">
-                  <div>
-                    <p className="text-[#8B949E] text-xs font-mono uppercase tracking-wider mb-1">Email Me</p>
-                    <p className="text-white sm:text-lg font-medium group-hover:text-[#0A84FF] transition-colors">{personalInfo.email}</p>
+                  <div className="overflow-hidden pr-2">
+                    <p className="text-[#8B949E] text-[10px] sm:text-xs font-mono uppercase tracking-wider mb-1">Email Me</p>
+                    <p className="text-white text-[13px] sm:text-lg font-medium group-hover:text-[#0A84FF] transition-colors truncate">{personalInfo.email}</p>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#0A84FF]/20 transition-colors">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 flex flex-shrink-0 items-center justify-center group-hover:bg-[#0A84FF]/20 transition-colors">
                     {copied ? <FiCheck size={18} className="text-green-400" /> : <FiCopy size={18} className="text-[#0A84FF]" />}
                   </div>
                 </div>
@@ -91,15 +91,15 @@ export default function Contact() {
                 href={personalInfo.linkedin} 
                 target="_blank" 
                 rel="noreferrer"
-                className="col-span-1 group relative overflow-hidden p-5 rounded-2xl glass glass-hover block"
+                className="col-span-1 group relative overflow-hidden p-4 sm:p-5 rounded-2xl glass glass-hover block"
               >
                 <FiLinkedin className="absolute -right-2 -bottom-2 text-[80px] text-[#0A84FF]/5 group-hover:text-[#0A84FF]/10 transition-colors duration-500 transform group-hover:scale-110" />
                 <div className="relative z-10">
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#0A84FF]/20 transition-colors mb-3">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#0A84FF]/20 transition-colors mb-2 sm:mb-3">
                     <FiArrowUpRight size={14} className="text-[#0A84FF]" />
                   </div>
-                  <p className="text-[#8B949E] text-[10px] font-mono uppercase tracking-wider mb-0.5">Connect</p>
-                  <p className="text-white text-sm font-medium group-hover:text-[#0A84FF] transition-colors truncate">LinkedIn</p>
+                  <p className="text-[#8B949E] text-[9px] sm:text-[10px] font-mono uppercase tracking-wider mb-0.5">Connect</p>
+                  <p className="text-white text-xs sm:text-sm font-medium group-hover:text-[#0A84FF] transition-colors truncate">LinkedIn</p>
                 </div>
               </a>
 
@@ -108,28 +108,28 @@ export default function Contact() {
                 href={personalInfo.whatsapp} 
                 target="_blank" 
                 rel="noreferrer"
-                className="col-span-1 group relative overflow-hidden p-5 rounded-2xl glass glass-hover block"
+                className="col-span-1 group relative overflow-hidden p-4 sm:p-5 rounded-2xl glass glass-hover block"
               >
                 <FaWhatsapp className="absolute -right-2 -bottom-2 text-[80px] text-[#0A84FF]/5 group-hover:text-[#25D366]/10 transition-colors duration-500 transform group-hover:scale-110" />
                 <div className="relative z-10">
-                  <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#25D366]/20 transition-colors mb-3">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#25D366]/20 transition-colors mb-2 sm:mb-3">
                     <FiArrowUpRight size={14} className="text-[#0A84FF] group-hover:text-[#25D366]" />
                   </div>
-                  <p className="text-[#8B949E] text-[10px] font-mono uppercase tracking-wider mb-0.5">Chat</p>
-                  <p className="text-white text-sm font-medium group-hover:text-[#25D366] transition-colors truncate">WhatsApp</p>
+                  <p className="text-[#8B949E] text-[9px] sm:text-[10px] font-mono uppercase tracking-wider mb-0.5">Chat</p>
+                  <p className="text-white text-xs sm:text-sm font-medium group-hover:text-[#25D366] transition-colors truncate">WhatsApp</p>
                 </div>
               </a>
 
               {/* Location - Full Width */}
-              <div className="col-span-2 group relative overflow-hidden p-6 rounded-2xl glass flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#0A84FF]/10 flex items-center justify-center flex-shrink-0 relative">
+              <div className="col-span-2 group relative overflow-hidden p-5 sm:p-6 rounded-2xl glass flex items-center gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0A84FF]/10 flex items-center justify-center flex-shrink-0 relative">
                   <div className="absolute inset-0 rounded-full border border-[#0A84FF]/30 animate-[ping_3s_ease-in-out_infinite]" />
                   <div className="absolute inset-2 rounded-full border border-[#0A84FF]/50 animate-[ping_3s_ease-in-out_infinite_1s]" />
-                  <FiMapPin size={20} className="text-[#0A84FF]" />
+                  <FiMapPin size={18} className="text-[#0A84FF] sm:text-[20px]" />
                 </div>
                 <div>
-                  <p className="text-[#8B949E] text-xs font-mono uppercase tracking-wider mb-1">Location</p>
-                  <p className="text-white text-sm font-medium">{personalInfo.location}</p>
+                  <p className="text-[#8B949E] text-[10px] sm:text-xs font-mono uppercase tracking-wider mb-0.5 sm:mb-1">Location</p>
+                  <p className="text-white text-[13px] sm:text-sm font-medium">{personalInfo.location}</p>
                 </div>
               </div>
 
@@ -145,9 +145,9 @@ export default function Contact() {
             className="lg:col-span-3 h-full"
           >
             <div className="relative h-full flex flex-col glass rounded-2xl border border-[#30363D] overflow-hidden transition-all duration-500 hover:border-[#0A84FF]/30 hover:shadow-[0_0_30px_rgba(10,132,255,0.15)] bg-[#050709]">
-              <div className="flex-1 p-6 sm:p-10 bg-[#0d1117] relative z-10">
-                <form onSubmit={handleSubmit} className="flex flex-col h-full gap-8">
-                  <div className="grid sm:grid-cols-2 gap-8">
+              <div className="flex-1 p-5 sm:p-10 bg-[#0d1117] relative z-10">
+                <form onSubmit={handleSubmit} className="flex flex-col h-full gap-6 sm:gap-8">
+                  <div className="grid sm:grid-cols-2 gap-6 sm:gap-8">
                     {/* Name Input */}
                     <div className="relative">
                       <input 

@@ -172,9 +172,9 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[60px] z-[90] bg-[#050505] border-b border-[#30363D] p-4 md:hidden shadow-2xl"
+            className="fixed inset-0 top-[64px] z-[90] bg-[#050505]/98 backdrop-blur-xl p-6 md:hidden h-[calc(100vh-64px)] overflow-y-auto"
           >
-            <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-3">
               {/* Combine all items */}
               {items.map(item => {
                 const isActive = active === item.href || (active === "" && item.href === "hero");
@@ -182,20 +182,22 @@ export default function Navbar() {
                   <a
                     key={item.label}
                     href={`#${item.href}`}
-                    className={`flex items-center gap-3 p-3 rounded-lg transition-colors ${isActive ? "bg-[#0A84FF]/10 text-[#0A84FF]" : "text-[#8B949E] hover:text-white hover:bg-[#21262D]"}`}
+                    className={`flex items-center gap-4 p-4 rounded-xl transition-colors ${isActive ? "bg-[#0A84FF]/10 text-[#0A84FF] border border-[#0A84FF]/20" : "text-[#8B949E] hover:text-white hover:bg-[#21262D] border border-transparent"}`}
                     onClick={(e) => {
                       e.preventDefault();
                       scrollToSection(item.href);
                     }}
                   >
-                    <item.icon className="w-5 h-5 opacity-70" />
-                    <span className="font-medium">{item.label}</span>
+                    <item.icon className="w-6 h-6 opacity-80" />
+                    <span className="font-semibold text-lg">{item.label}</span>
                   </a>
                 );
               })}
-              <div className="h-px bg-[#30363D] my-2" />
-              <div className="flex flex-col gap-2 mt-2">
-                <VengeanceButton onClick={() => scrollToSection("contact")} fullWidth>
+              
+              <div className="h-px bg-[#30363D]/60 my-4" />
+              
+              <div className="flex justify-center mt-2">
+                <VengeanceButton onClick={() => scrollToSection("contact")}>
                   Hire Me
                 </VengeanceButton>
               </div>

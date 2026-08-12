@@ -49,10 +49,10 @@ export default function Footer() {
       <div className="px-4 sm:px-6 mx-auto max-w-7xl lg:px-12 relative z-10">
         
         {/* 4-Column Professional Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 sm:gap-8 mb-16 sm:mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 sm:gap-8 mb-12 sm:mb-20">
           
           {/* Column 1: Brand & Identity */}
-          <div className="lg:col-span-1">
+          <div className="col-span-2 lg:col-span-1">
             <span className="text-2xl sm:text-3xl font-black text-white tracking-tight">
               Engineer.Humais<span className="text-[#0A84FF]">.</span>
             </span>
@@ -61,7 +61,7 @@ export default function Footer() {
             </p>
             
             {/* macOS Style Social Dock */}
-            <div className="flex gap-2 mt-8 p-2 rounded-2xl glass w-max shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-[#30363D]/60">
+            <div className="flex gap-2 mt-6 sm:mt-8 p-2 rounded-2xl glass w-max shadow-[0_10px_30px_rgba(0,0,0,0.5)] border-[#30363D]/60">
               {socials.map((s) => {
                 const Icon = s.icon;
                 return (
@@ -72,9 +72,9 @@ export default function Footer() {
                     rel="noreferrer"
                     whileHover={{ y: -4, scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="relative group p-3 rounded-xl hover:bg-white/10 transition-colors text-[#8B949E] hover:text-[#0A84FF]"
+                    className="relative group p-2.5 sm:p-3 rounded-xl hover:bg-white/10 transition-colors text-[#8B949E] hover:text-[#0A84FF]"
                   >
-                    <Icon size={18} />
+                    <Icon className="w-[16px] h-[16px] sm:w-[18px] sm:h-[18px]" />
                     {/* Tooltip */}
                     <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0 px-3 py-1.5 bg-[#161b22] border border-[#30363D] rounded-lg text-xs font-mono text-white pointer-events-none shadow-xl whitespace-nowrap">
                       {s.label}
@@ -86,14 +86,14 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Quick Navigation */}
-          <div>
-            <p className="mb-6 font-mono text-xs font-semibold tracking-widest text-[#0A84FF] uppercase">Quick Links</p>
-            <ul className="flex flex-col gap-4">
+          <div className="col-span-1">
+            <p className="mb-5 sm:mb-6 font-mono text-[10px] sm:text-xs font-semibold tracking-widest text-[#0A84FF] uppercase">Quick Links</p>
+            <ul className="flex flex-col gap-3 sm:gap-4">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="relative group inline-block text-[#8B949E] hover:text-white transition-colors duration-300 text-sm"
+                    className="relative group inline-block text-[#8B949E] hover:text-white transition-colors duration-300 text-[13px] sm:text-sm"
                   >
                     {link.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-[#0A84FF] to-[#00D4FF] group-hover:w-full transition-all duration-300 ease-out" />
@@ -104,9 +104,9 @@ export default function Footer() {
           </div>
 
           {/* Column 3: Resources */}
-          <div>
-            <p className="mb-6 font-mono text-xs font-semibold tracking-widest text-[#0A84FF] uppercase">Resources</p>
-            <ul className="flex flex-col gap-4">
+          <div className="col-span-1">
+            <p className="mb-5 sm:mb-6 font-mono text-[10px] sm:text-xs font-semibold tracking-widest text-[#0A84FF] uppercase">Resources</p>
+            <ul className="flex flex-col gap-3 sm:gap-4">
               {resources.map((link) => {
                 const Icon = link.icon;
                 return (
@@ -115,9 +115,9 @@ export default function Footer() {
                       href={link.href}
                       target={link.href !== "#" ? "_blank" : "_self"}
                       rel="noreferrer"
-                      className="flex items-center gap-2 group text-[#8B949E] hover:text-white transition-colors duration-300 text-sm w-max"
+                      className="flex items-center gap-2 group text-[#8B949E] hover:text-white transition-colors duration-300 text-[13px] sm:text-sm w-max"
                     >
-                      <Icon size={14} className="group-hover:text-[#0A84FF] transition-colors" />
+                      <Icon className="w-[12px] h-[12px] sm:w-[14px] sm:h-[14px] group-hover:text-[#0A84FF] transition-colors" />
                       <span className="relative inline-block">
                         {link.label}
                         <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-[#0A84FF] to-[#00D4FF] group-hover:w-full transition-all duration-300 ease-out" />
@@ -130,7 +130,7 @@ export default function Footer() {
           </div>
 
           {/* Column 4: Contact & Availability */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <p className="mb-6 font-mono text-xs font-semibold tracking-widest text-[#0A84FF] uppercase">Contact</p>
             <div className="flex flex-col gap-4 items-start">
               {/* Email Link */}
