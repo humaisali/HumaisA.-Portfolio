@@ -65,10 +65,10 @@ export default function ExpandableBentoGrid({ items }) {
                         <motion.div
                             layoutId={`card-${active.title}-${id}`}
                             ref={ref}
-                            className="w-[90%] sm:w-full max-w-[460px] max-h-[85vh] sm:h-fit sm:max-h-[90%] flex flex-col bg-[#0d1117] border border-[#30363D] rounded-2xl sm:rounded-3xl overflow-y-auto overflow-x-hidden shadow-2xl relative [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                            className="w-[90%] sm:w-full max-w-[460px] md:max-w-[850px] lg:max-w-[950px] max-h-[85vh] sm:h-fit flex flex-col md:flex-row bg-[#0d1117] border border-[#30363D] rounded-2xl sm:rounded-3xl overflow-y-auto md:overflow-hidden shadow-2xl relative [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                         >
-                            <motion.div layoutId={`image-${active.title}-${id}`} className="flex-shrink-0">
-                                <div className="w-full bg-[#0A84FF]/10 flex items-center justify-center perspective-distant transform-3d border-b border-[#30363D] relative overflow-hidden" style={{ aspectRatio: "1.294" }}>
+                            <motion.div layoutId={`image-${active.title}-${id}`} className="flex-shrink-0 w-full md:w-[55%] lg:w-[60%] flex items-center justify-center bg-[#050709] border-b md:border-b-0 md:border-r border-[#30363D]">
+                                <div className="w-full bg-[#0A84FF]/10 flex items-center justify-center perspective-distant transform-3d relative overflow-hidden" style={{ aspectRatio: "1.294" }}>
                                     {active.pdfUrl ? (
                                         <iframe src={`${active.pdfUrl}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`} scrolling="no" className="absolute inset-0 w-full h-full bg-white border-none overflow-hidden" title={active.title} />
                                     ) : active.icon ? (
@@ -79,8 +79,8 @@ export default function ExpandableBentoGrid({ items }) {
                                 </div>
                             </motion.div>
 
-                            <div className="flex flex-col flex-grow bg-[#0d1117]">
-                                <div className="flex justify-between px-4 py-3 sm:px-6 sm:py-4 items-center border-b border-[#30363D]/50 flex-shrink-0">
+                            <div className="flex flex-col flex-grow bg-[#0d1117] md:absolute md:inset-y-0 md:right-0 md:w-[45%] lg:w-[40%] md:overflow-y-auto">
+                                <div className="flex justify-between px-4 py-3 sm:px-6 sm:py-4 items-center border-b border-[#30363D]/50 flex-shrink-0 sticky top-0 bg-[#0d1117] z-10">
                                     <div className="pr-3 sm:pr-4">
                                         <motion.h3
                                             layoutId={`title-${active.title}-${id}`}
