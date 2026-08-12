@@ -6,7 +6,7 @@ export default function About() {
   return (
     <section id="about" className="relative z-10 overflow-hidden section">
       <div className="px-4 mx-auto max-w-7xl sm:px-4 lg:px-4">
-        
+
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -35,11 +35,11 @@ export default function About() {
             <p className="text-[#8B949E] leading-relaxed mb-8 text-sm sm:text-base">
               {personalInfo.bio}
             </p>
-            
+
             <hr className="border-[#30363D] mb-8" />
-            
+
             <h3 className="mb-6 text-lg font-bold tracking-wide uppercase">Personal Info</h3>
-            
+
             <div className="grid grid-cols-1 gap-4 mb-10 sm:grid-cols-2 sm:gap-2">
               <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Name :</span> <span className="font-medium text-white">{personalInfo.name}</span></div>
               <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Address :</span> <span className="font-medium text-white">{personalInfo.location}</span></div>
@@ -50,7 +50,7 @@ export default function About() {
               <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Freelance :</span> <span className="font-medium text-white">Available</span></div>
               <div className="flex text-sm sm:text-base"><span className="text-[#8B949E] w-24 flex-shrink-0">Languages :</span> <span className="font-medium text-white">English, Urdu, Pashto</span></div>
             </div>
-            
+
             <div>
               <VengeanceButton href="/Humais-Resume.pdf" download variant="outline">
                 Download CV
@@ -88,7 +88,7 @@ export default function About() {
                 <div key={index} className="relative pl-6 sm:pl-10 border-l-2 border-[#30363D] hover:border-[#0A84FF] transition-colors duration-300">
                   {/* Timeline dot */}
                   <div className="absolute top-0 left-0 w-5 h-5 rounded-full bg-[#101010] border-4 border-[#0A84FF] -translate-x-[11px] mt-1 shadow-[0_0_15px_rgba(10,132,255,0.3)]" />
-                  
+
                   <div className="inline-block mb-3 text-xs sm:text-sm font-semibold tracking-widest text-[#0A84FF]">
                     {edu.year}
                   </div>
