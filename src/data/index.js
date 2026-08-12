@@ -49,7 +49,7 @@ export const techIcons = [
 export const experience = [
   {
     role: "Machine Learning Intern",
-    company: "FlyRank AI",
+    company: "FlyRank AI (Remote)",
     period: "Jul 2026 - Present",
     type: "Internship",
     color: "#0A84FF",
@@ -58,7 +58,7 @@ export const experience = [
   },
   {
     role: "MERN Stack Developer",
-    company: "SkyTech Developers",
+    company: "SkyTech Developers (Remote)",
     period: "Feb 2025 - Present",
     type: "Freelance",
     color: "#00D4FF",
@@ -67,7 +67,7 @@ export const experience = [
   },
   {
     role: "Web Development Intern",
-    company: "Qwetrum Technologies",
+    company: "Qwetrum Technologies (Remote)",
     period: "Jun 2026 - Jul 2026",
     type: "Internship",
     color: "#8B949E",
