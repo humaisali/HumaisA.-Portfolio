@@ -1,87 +1,69 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 import { projects } from "../data/index";
 
-var filters = ["All", "AI", "Frontend"];
+const filters = ["All", "AI", "Frontend"];
 
-function TiltCard(props) {
-  var project = props.project;
-  var cardRef = useRef(null);
-
-  function handleMouseMove(e) {
-    var rect = cardRef.current.getBoundingClientRect();
-    var x = e.clientX - rect.left;
-    var y = e.clientY - rect.top;
-    var cx = rect.width / 2;
-    var cy = rect.height / 2;
-    var rotX = ((y - cy) / cy) * -6;
-    var rotY = ((x - cx) / cx) * 6;
-    cardRef.current.style.transform = "perspective(1000px) rotateX(" + rotX + "deg) rotateY(" + rotY + "deg) scale(1.02)";
-  }
-
-  function handleMouseLeave() {
-    cardRef.current.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
-  }
-
+function ProjectCard({ project }) {
   return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transition: "transform 0.2s ease", transformStyle: "preserve-3d" }}
-      className="glass rounded-xl overflow-hidden border border-[#30363D]/50 hover:border-[#0A84FF]/30 flex flex-col h-full transition-colors duration-300"
-    >
-      <div className="w-full img-placeholder" style={{ aspectRatio: "16/9" }}>
-        <div className="absolute inset-0 z-10 flex items-center justify-center">
-          <img src={project.image} alt={project.title} className="object-cover w-full h-full" />
+    <div className="group relative flex flex-col h-full glass rounded-2xl border border-[#30363D] overflow-hidden transition-all duration-500 hover:border-[#0A84FF]/30 hover:shadow-[0_0_30px_rgba(10,132,255,0.15)]">
+      {/* Top Gradient Bar */}
+      <div className={`h-1 w-full bg-gradient-to-r ${project.gradient}`} />
+      
+      {/* Image Container with MacOS Window aesthetic */}
+      <div className="relative w-full overflow-hidden bg-[#050709] border-b border-[#30363D]">
+        <div className="absolute top-3 left-3 z-20 flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]/80 border border-[#E0443E]/50" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]/80 border border-[#DEA123]/50" />
+          <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]/80 border border-[#1AAB29]/50" />
+        </div>
+        <div className="aspect-[16/9] overflow-hidden relative">
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105" 
+          />
+          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500" />
         </div>
       </div>
 
-      <div className="h-0.5 w-full gradient-animate" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF, #0A84FF)" }} />
-
-      <div className="flex flex-col flex-1 p-4 sm:p-5">
-        <div className="flex items-start justify-between mb-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xl">{project.icon}</span>
-            <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-xs font-mono uppercase tracking-wider px-2 py-0.5 rounded border text-[#0A84FF] border-[#0A84FF]/20 bg-[#0A84FF]/05">
-                {project.category}
+      {/* Card Content */}
+      <div className="flex flex-col flex-1 p-5 sm:p-6 bg-[#0d1117] relative z-10">
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex gap-2 items-center flex-wrap">
+            <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border text-[#0A84FF] border-[#0A84FF]/20 bg-[#0A84FF]/5 backdrop-blur-md">
+              {project.category}
+            </span>
+            {project.featured && (
+              <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full border text-[#00D4FF] border-[#00D4FF]/20 bg-[#00D4FF]/5 backdrop-blur-md">
+                Featured
               </span>
-              {project.featured && (
-                <span className="text-xs px-2 py-0.5 rounded border border-[#00D4FF]/20 bg-[#00D4FF]/05 text-[#00D4FF]">
-                  Featured
-                </span>
-              )}
-            </div>
+            )}
           </div>
-          <div className="flex gap-1.5 flex-shrink-0">
+          <div className="flex gap-1">
             {project.github && (
-              <a href={project.github} target="_blank" rel="noreferrer"
-                className="text-[#8B949E] hover:text-white p-1.5 rounded hover:bg-[#21262D] transition-all duration-200">
-                <FiGithub size={15} />
+              <a href={project.github} target="_blank" rel="noreferrer" className="text-[#8B949E] hover:text-white p-2 rounded-full hover:bg-white/5 transition-colors">
+                <FiGithub size={18} />
               </a>
             )}
             {project.live && (
-              <a href={project.live} target="_blank" rel="noreferrer"
-                className="text-[#8B949E] hover:text-[#0A84FF] p-1.5 rounded hover:bg-[#0A84FF]/10 transition-all duration-200">
-                <FiExternalLink size={15} />
+              <a href={project.live} target="_blank" rel="noreferrer" className="text-[#8B949E] hover:text-[#0A84FF] p-2 rounded-full hover:bg-[#0A84FF]/10 transition-colors">
+                <FiExternalLink size={18} />
               </a>
             )}
           </div>
         </div>
-
-        <h3 className="mb-2 text-sm font-bold text-white sm:text-base">{project.title}</h3>
-        <p className="text-[#8B949E] text-xs sm:text-sm leading-relaxed flex-1 mb-4">{project.description}</p>
-
-        <div className="flex flex-wrap gap-1.5">
-          {project.techs.map(function(tech) {
-            return (
-              <span key={tech} className="text-xs px-2 py-1 bg-[#0D1117] border border-[#30363D] text-[#8B949E] rounded font-mono">
-                {tech}
-              </span>
-            );
-          })}
+        
+        <h3 className="text-lg sm:text-xl font-bold text-white mb-3 group-hover:text-[#0A84FF] transition-colors line-clamp-1">{project.title}</h3>
+        <p className="text-[#8B949E] text-sm leading-relaxed mb-6 flex-1 line-clamp-3">{project.description}</p>
+        
+        <div className="flex flex-wrap gap-2 mt-auto">
+          {project.techs.map((tech) => (
+            <span key={tech} className="text-xs px-2.5 py-1 bg-white/5 border border-white/10 text-[#8B949E] rounded-md font-mono group-hover:border-white/20 transition-colors">
+              {tech}
+            </span>
+          ))}
         </div>
       </div>
     </div>
@@ -89,18 +71,17 @@ function TiltCard(props) {
 }
 
 export default function Projects() {
-  var [active, setActive] = useState("All");
+  const [active, setActive] = useState("All");
 
-  var filtered = projects.filter(function(p) {
-    return active === "All" || p.category === active;
-  });
+  const filtered = projects.filter(
+    (p) => active === "All" || p.category === active
+  );
 
   return (
     <section id="projects" className="relative z-10 overflow-hidden section">
       <div className="absolute right-0 top-1/4 w-[500px] h-[500px] bg-[#0A84FF] rounded-full opacity-[0.03] blur-[120px] pointer-events-none" />
 
       <div className="relative px-4 mx-auto sm:px-6 max-w-7xl lg:px-12">
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,49 +94,53 @@ export default function Projects() {
           <div className="w-20 h-1 mt-4 rounded-full" style={{ background: "linear-gradient(90deg, #0A84FF, #00D4FF)" }} />
         </motion.div>
 
+        {/* iOS-Style Segmented Control for Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-2 mb-10 sm:gap-3 sm:mb-12"
+          className="flex justify-center mb-10 sm:mb-14"
         >
-          {filters.map(function(f) {
-            var isActive = active === f;
-            return (
-              <motion.button
-                key={f}
-                onClick={function() { setActive(f); }}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
-                className={"px-4 sm:px-5 py-2 rounded-md text-sm font-medium transition-all duration-200 " +
-                  (isActive
-                    ? "bg-[#0A84FF] text-white"
-                    : "glass border border-[#30363D]/50 text-[#8B949E] hover:text-white hover:border-[#0A84FF]/30"
-                  )}
-              >
-                {f}
-              </motion.button>
-            );
-          })}
-        </motion.div>
-
-        <motion.div layout className="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {filtered.map(function(project, i) {
+          <div className="inline-flex p-1 bg-[#161B22] border border-[#30363D] rounded-xl shadow-inner">
+            {filters.map((f) => {
+              const isActive = active === f;
               return (
-                <motion.div
-                  key={project.title}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.35, delay: i * 0.06 }}
+                <button
+                  key={f}
+                  onClick={() => setActive(f)}
+                  className={`relative px-6 py-2 sm:px-8 sm:py-2.5 text-sm font-medium rounded-lg transition-colors z-10 ${
+                    isActive ? "text-white" : "text-[#8B949E] hover:text-white"
+                  }`}
                 >
-                  <TiltCard project={project} />
-                </motion.div>
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-filter"
+                      className="absolute inset-0 bg-[#30363D] border border-white/10 rounded-lg -z-10 shadow-sm"
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                    />
+                  )}
+                  {f}
+                </button>
               );
             })}
+          </div>
+        </motion.div>
+
+        <motion.div layout className="grid gap-6 sm:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((project, i) => (
+              <motion.div
+                key={project.title}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.35, delay: i * 0.06 }}
+              >
+                <ProjectCard project={project} />
+              </motion.div>
+            ))}
           </AnimatePresence>
         </motion.div>
       </div>
