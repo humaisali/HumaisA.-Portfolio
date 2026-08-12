@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMessageSquare, FiX, FiSend, FiUser, FiExternalLink } from "react-icons/fi";
+import { FiMessageSquare, FiX, FiSend, FiUser, FiExternalLink, FiTrash2 } from "react-icons/fi";
 import { RiRobot2Line } from "react-icons/ri";
+import { BsStars } from "react-icons/bs";
 
 var SYSTEM_PROMPT = `You are Humais Ali's personal portfolio assistant. Your ONLY job is to answer questions about Humais Ali - his skills, projects, education, experience, and how to contact him. You are friendly, concise, and professional.
 
@@ -120,7 +121,7 @@ function renderMessageContent(text) {
         href={href}
         target={isEmail ? "_self" : "_blank"}
         rel="noreferrer"
-        className="inline-flex items-center gap-0.5 text-[#0A84FF] hover:text-[#00D4FF] underline underline-offset-2 decoration-[#0A84FF]/40 transition-colors duration-150 break-all"
+        className="inline-flex items-center gap-0.5 font-semibold text-[#0A84FF] hover:text-[#00D4FF] underline underline-offset-2 decoration-[#0A84FF]/40 hover:decoration-[#00D4FF] transition-colors duration-150 break-all"
       >
         {raw}
         {!isEmail && <FiExternalLink size={10} className="flex-shrink-0 ml-0.5 mt-px" />}
@@ -141,52 +142,76 @@ function renderMessageContent(text) {
 function Message(props) {
   var msg = props.msg;
   var isBot = msg.role === "assistant";
+  var isNew = props.isNew !== false; // Default to true if not specified
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.25 }}
-      className={"flex gap-2.5 " + (isBot ? "flex-row" : "flex-row-reverse")}
+      initial={isNew ? { opacity: 0, y: 15, scale: 0.95 } : { opacity: 1, y: 0, scale: 1 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.4, type: "spring", bounce: 0.3 }}
+      className={"flex gap-3 " + (isBot ? "flex-row" : "flex-row-reverse")}
     >
-      <div className={"w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 " +
-        (isBot ? "bg-[#0A84FF]/20 border border-[#0A84FF]/30" : "bg-[#21262D] border border-[#30363D]")}>
+      <div className={"w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 shadow-lg " +
+        (isBot ? "bg-gradient-to-br from-[#0A84FF]/30 to-[#00D4FF]/10 border border-[#0A84FF]/40 shadow-[0_0_15px_rgba(10,132,255,0.2)]" : "bg-[#21262D] border border-[#30363D]")}>
         {isBot
-          ? <RiRobot2Line size={14} className="text-[#0A84FF]" />
-          : <FiUser size={12} className="text-[#8B949E]" />
+          ? <RiRobot2Line size={16} className="text-[#0A84FF]" />
+          : <FiUser size={14} className="text-[#8B949E]" />
         }
       </div>
 
-      <div className={"max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed " +
-        (isBot
-          ? "bg-[#161B22] border border-[#30363D]/60 text-[#E6EDF3] rounded-tl-sm"
-          : "bg-[#0A84FF] text-white rounded-tr-sm")}>
-        {isBot ? renderMessageContent(msg.content) : msg.content}
-      </div>
+      {isBot ? (
+        // AI Premium Bubble (Gradient Border effect)
+        <div className="max-w-[80%] rounded-2xl rounded-tl-sm p-[1px] bg-gradient-to-br from-[#30363D]/80 via-[#30363D]/20 to-[#0A84FF]/30">
+          <div className="w-full h-full bg-[#161B22]/95 backdrop-blur-md rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm leading-relaxed text-[#E6EDF3]">
+            {renderMessageContent(msg.content)}
+          </div>
+        </div>
+      ) : (
+        // User Premium Bubble (Glowing Blue)
+        <div className="max-w-[80%] px-4 py-2.5 rounded-2xl rounded-tr-sm text-sm leading-relaxed bg-[#0A84FF] text-white shadow-[0_0_15px_rgba(10,132,255,0.35)] font-medium">
+          {msg.content}
+        </div>
+      )}
     </motion.div>
   );
 }
 
-// ─── Animated typing dots ─────────────────────────────────────────────────────
+// ─── Dynamic Breathing Typing Indicator ───────────────────────────────────────
 function TypingIndicator() {
   return (
-    <div className="flex gap-2.5">
-      <div className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 bg-[#0A84FF]/20 border border-[#0A84FF]/30">
-        <RiRobot2Line size={14} className="text-[#0A84FF]" />
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      className="flex gap-3 flex-row"
+    >
+      <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 bg-gradient-to-br from-[#0A84FF]/30 to-[#00D4FF]/10 border border-[#0A84FF]/40 shadow-[0_0_15px_rgba(10,132,255,0.2)]">
+        <BsStars size={14} className="text-[#0A84FF] animate-pulse" />
       </div>
-      <div className="bg-[#161B22] border border-[#30363D]/60 rounded-2xl rounded-tl-sm px-4 py-3 flex items-center gap-1.5">
-        {[0, 1, 2].map(function(i) {
-          return (
-            <motion.span
-              key={i}
-              className="w-1.5 h-1.5 rounded-full bg-[#0A84FF]"
-              animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.2 }}
-            />
-          );
-        })}
+      <div className="max-w-[80%] rounded-2xl rounded-tl-sm p-[1px] bg-gradient-to-br from-[#30363D]/80 via-[#30363D]/20 to-[#0A84FF]/30">
+        <div className="bg-[#161B22]/95 backdrop-blur-md rounded-2xl rounded-tl-sm px-4 py-4 flex items-center gap-1.5 h-full">
+          {[0, 1, 2].map(function(i) {
+            return (
+              <motion.span
+                key={i}
+                className="w-1.5 h-1.5 rounded-full bg-[#0A84FF]"
+                animate={{ 
+                  y: [0, -4, 0],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.4, 1, 0.4]
+                }}
+                transition={{ 
+                  duration: 0.8, 
+                  repeat: Infinity, 
+                  delay: i * 0.15,
+                  ease: "easeInOut"
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -217,11 +242,21 @@ export default function PortfolioChatBot() {
     }
   }, [open]);
 
+  function clearChat() {
+    setMessages([{
+      role: "assistant",
+      content: "Hey! 👋 I'm Humais's portfolio assistant. Ask me anything about his skills, projects, experience, or how to get in touch!",
+    }]);
+    setShowSuggestions(true);
+    setInput("");
+  }
+
   async function sendMessage(text) {
     var userText = (text || input).trim();
     if (!userText || loading) return;
 
     setInput("");
+    if (inputRef.current) inputRef.current.style.height = "auto";
     setShowSuggestions(false);
     setMessages(function(prev) {
       return prev.concat({ role: "user", content: userText });
@@ -283,8 +318,19 @@ export default function PortfolioChatBot() {
 
   return (
     <>
-      {/* ── Floating toggle button — VengeanceButton style ── */}
       <style>{`
+        @keyframes gradientX {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .bg-neural {
+          background: linear-gradient(-45deg, rgba(10,132,255,0.25), rgba(0,212,255,0.1), rgba(10,132,255,0.25));
+          background-size: 400% 400%;
+          animation: gradientX 8s ease infinite;
+        }
+
+        /* VengeanceButton toggle styles */
         .chatbot-toggle {
           --highlight-hue: 210deg;
           position: fixed;
@@ -417,6 +463,8 @@ export default function PortfolioChatBot() {
           pointer-events: none;
         }
       `}</style>
+
+      {/* ── Floating toggle button ── */}
       <button
         onClick={function() { setOpen(function(p) { return !p; }); }}
         className="chatbot-toggle"
@@ -451,62 +499,89 @@ export default function PortfolioChatBot() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="fixed bottom-24 right-4 sm:bottom-28 sm:right-8 z-[199] flex flex-col"
             style={{
-              width: "min(380px, calc(100vw - 32px))",
-              height: "min(520px, calc(100vh - 160px))",
+              width: "min(400px, calc(100vw - 32px))",
+              height: "min(560px, calc(100vh - 160px))",
             }}
           >
             <div
-              className="flex flex-col h-full rounded-2xl overflow-hidden border border-[#30363D]/70 shadow-2xl shadow-black/50"
-              style={{ background: "rgba(13, 17, 23, 0.97)", backdropFilter: "blur(24px)" }}
+              className="flex flex-col h-full rounded-2xl overflow-hidden border border-[#30363D]/70 shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
+              style={{ background: "rgba(13, 17, 23, 0.95)", backdropFilter: "blur(24px)" }}
             >
-              {/* Header */}
-              <div
-                className="flex items-center gap-3 px-4 py-3.5 border-b border-[#30363D]/60 flex-shrink-0"
-                style={{ background: "linear-gradient(135deg, rgba(10,132,255,0.12), rgba(0,212,255,0.06))" }}
-              >
-                <div className="w-8 h-8 rounded-full bg-[#0A84FF]/20 border border-[#0A84FF]/40 flex items-center justify-center flex-shrink-0">
-                  <RiRobot2Line size={16} className="text-[#0A84FF]" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-white font-semibold text-sm leading-none mb-0.5">Humais's Assistant</p>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-[#8B949E] text-xs font-mono">Online · Ask me anything</span>
+              {/* Animated Neural Header */}
+              <div className="relative flex items-center justify-between px-5 py-4 border-b border-[#30363D]/60 flex-shrink-0 overflow-hidden">
+                <div className="absolute inset-0 bg-neural" />
+                
+                <div className="relative z-10 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#161B22] border border-[#0A84FF]/50 shadow-[0_0_15px_rgba(10,132,255,0.3)] flex items-center justify-center flex-shrink-0">
+                    <RiRobot2Line size={20} className="text-[#0A84FF]" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-bold text-[15px] tracking-wide leading-none mb-1">Humais's AI</p>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.8)] animate-pulse" />
+                      <span className="text-[#8B949E] text-[11px] uppercase tracking-widest font-semibold font-mono">Online</span>
+                    </div>
                   </div>
                 </div>
-                <button
-                  onClick={function() { setOpen(false); }}
-                  className="text-[#8B949E] hover:text-white transition-colors bg-transparent border-none cursor-pointer p-1"
-                >
-                  <FiX size={16} />
-                </button>
+
+                <div className="relative z-10 flex items-center gap-1">
+                  {messages.length > 1 && (
+                    <button
+                      onClick={clearChat}
+                      className="text-[#8B949E] hover:text-[#ff4444] hover:bg-[#ff4444]/10 transition-colors bg-transparent border-none cursor-pointer p-2 rounded-lg"
+                      title="Clear Chat"
+                    >
+                      <FiTrash2 size={16} />
+                    </button>
+                  )}
+                  <button
+                    onClick={function() { setOpen(false); }}
+                    className="text-[#8B949E] hover:text-white hover:bg-white/10 transition-colors bg-transparent border-none cursor-pointer p-2 rounded-lg"
+                  >
+                    <FiX size={18} />
+                  </button>
+                </div>
               </div>
 
               {/* Messages scroll area */}
-              <div className="flex flex-col flex-1 gap-3 px-4 py-4 overflow-y-auto chatbot-messages">
+              <div className="flex flex-col flex-1 gap-4 px-5 py-5 overflow-y-auto chatbot-messages">
                 {messages.map(function(msg, i) {
-                  return <Message key={i} msg={msg} />;
+                  return <Message key={i} msg={msg} isNew={i === messages.length - 1} />;
                 })}
-                {loading && <TypingIndicator />}
+                
+                <AnimatePresence>
+                  {loading && <TypingIndicator />}
+                </AnimatePresence>
 
-                {/* Quick suggestions */}
+                {/* Interactive Neon Suggestions */}
                 {showSuggestions && messages.length === 1 && !loading && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="flex flex-col gap-2 mt-1"
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      hidden: { opacity: 0 },
+                      visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } }
+                    }}
+                    className="flex flex-wrap gap-2.5 mt-2"
                   >
-                    <p className="text-[#8B949E] text-xs font-mono px-1">Suggested questions:</p>
+                    <div className="w-full mb-1">
+                      <p className="text-[#8B949E] text-xs font-mono flex items-center gap-1.5 px-1">
+                        <BsStars className="text-[#0A84FF]" /> Suggested questions
+                      </p>
+                    </div>
                     {SUGGESTIONS.map(function(s) {
                       return (
-                        <button
+                        <motion.button
                           key={s}
+                          variants={{
+                            hidden: { opacity: 0, scale: 0.8, y: 10 },
+                            visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", bounce: 0.4 } }
+                          }}
                           onClick={function() { sendMessage(s); }}
-                          className="text-left px-3 py-2 rounded-lg border border-[#30363D]/60 text-[#8B949E] hover:text-white hover:border-[#0A84FF]/40 hover:bg-[#0A84FF]/05 text-xs transition-all duration-200 bg-transparent cursor-pointer"
+                          className="px-4 py-2 rounded-full border border-[#0A84FF]/30 bg-[#0A84FF]/5 text-xs font-medium text-[#E6EDF3] hover:bg-[#0A84FF]/20 hover:border-[#0A84FF] hover:shadow-[0_0_15px_rgba(10,132,255,0.2)] transition-all duration-300 cursor-pointer"
                         >
                           {s}
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </motion.div>
@@ -516,29 +591,37 @@ export default function PortfolioChatBot() {
               </div>
 
               {/* Input bar */}
-              <div className="px-3 pb-3 pt-2 border-t border-[#30363D]/60 flex-shrink-0">
-                <div className="flex items-center gap-2 bg-[#161B22] border border-[#30363D] rounded-xl px-3 py-2.5 focus-within:border-[#0A84FF]/50 transition-colors duration-200">
-                  <input
+              <div className="px-4 pb-4 pt-3 border-t border-[#30363D]/60 flex-shrink-0 bg-[#0d1117]/80">
+                <div className="flex items-end gap-2 bg-[#161B22] border border-[#30363D] rounded-xl px-3 py-2.5 shadow-inner focus-within:border-[#0A84FF]/50 focus-within:shadow-[0_0_15px_rgba(10,132,255,0.15)] transition-all duration-300">
+                  <textarea
                     ref={inputRef}
-                    type="text"
+                    rows="1"
                     value={input}
-                    onChange={function(e) { setInput(e.target.value); }}
+                    onChange={function(e) { 
+                      setInput(e.target.value); 
+                      e.target.style.height = "auto";
+                      e.target.style.height = e.target.scrollHeight + "px";
+                    }}
                     onKeyDown={handleKeyDown}
                     placeholder="Ask about Humais..."
-                    className="flex-1 bg-transparent text-white text-sm placeholder-[#8B949E] outline-none font-mono min-w-0"
+                    className="flex-1 bg-transparent text-white text-sm placeholder-[#8B949E] outline-none font-mono min-w-0 resize-none overflow-y-auto py-1"
+                    style={{ minHeight: "24px", maxHeight: "72px" }}
                     disabled={loading}
                   />
                   <button
                     onClick={function() { sendMessage(); }}
                     disabled={!input.trim() || loading}
-                    className="w-7 h-7 rounded-lg bg-[#0A84FF] flex items-center justify-center flex-shrink-0 border-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#0066CC] transition-colors duration-200"
+                    className="w-8 h-8 rounded-lg bg-[#0A84FF] flex items-center justify-center flex-shrink-0 border-none cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#00D4FF] hover:shadow-[0_0_10px_rgba(10,132,255,0.4)] transition-all duration-300"
                   >
-                    <FiSend size={13} className="text-white" />
+                    <FiSend size={14} className="text-white ml-0.5" />
                   </button>
                 </div>
-                <p className="text-[#8B949E] text-[10px] font-mono text-center mt-2">
-                  Powered by Gemini AI · Portfolio context only
-                </p>
+                <div className="flex items-center justify-center gap-1.5 mt-2.5">
+                  <BsStars size={10} className="text-[#0A84FF]" />
+                  <p className="text-[#8B949E] text-[10px] font-mono tracking-wide uppercase">
+                    Powered by Gemini 2.5 Flash
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>
