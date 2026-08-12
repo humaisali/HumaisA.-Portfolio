@@ -153,3 +153,46 @@ export const projects = [
     image: "/fida-hussain-portfolio.png",
   },
 ];
+
+export const certifications = [
+  {
+    id: 1,
+    title: "Software Project Management",
+    subtitle: "EDUCBA",
+    description: "Jul 2026",
+    content: "Earned this certification to strengthen my project management fundamentals, focusing on software development life cycles, agile methodologies, and effective team coordination.",
+    ctaLink: "https://www.coursera.org/account/accomplishments/verify/RFCY3HQHUFQ1",
+    pdfUrl: "/Certifications/EDUCBA-Software Project Managment.pdf",
+    logoUrl: "https://www.google.com/s2/favicons?domain=educba.com&sz=128",
+  },
+  {
+    id: 2,
+    title: "Creative & Critical Thinking",
+    subtitle: "IBM",
+    description: "Jul 2026",
+    content: "Developed advanced problem-solving techniques and critical thinking frameworks provided by IBM, essential for designing robust software architectures and debugging complex systems.",
+    ctaLink: "https://www.coursera.org/account/accomplishments/verify/F2PKCPRX7S7G",
+    pdfUrl: "/Certifications/IBM-Solving Problems with Creative and Critical Thinking Certificate.pdf",
+    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg",
+  },
+  {
+    id: 3,
+    title: "Effective Problem-Solving",
+    subtitle: "UC Irvine",
+    description: "Jul 2026",
+    content: "Acquired analytical decision-making skills through UC Irvine's curriculum, empowering me to make data-driven technical choices in high-stakes environments.",
+    ctaLink: "https://www.coursera.org/account/accomplishments/verify/8ZSM9H4W1PN2",
+    pdfUrl: "/Certifications/UCI-Effective Problem-Solving and Decision-Making Certificate.pdf",
+    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/3/36/University_of_California%2C_Irvine_logo.svg",
+  },
+  {
+    id: 4,
+    title: "AI Fluency: Foundations",
+    subtitle: "Anthropic",
+    description: "May 2026",
+    content: "Gained a deep foundational understanding of AI safety frameworks, prompt engineering, and LLM mechanics directly from Anthropic, enhancing my capability to build reliable AI-integrated tools.",
+    ctaLink: "https://verify.skilljar.com/c/6gvqgot2nva6",
+    pdfUrl: "/Certifications/Anthrophic-AI Fluency Framework & Foundation.pdf",
+    logoUrl: "https://www.google.com/s2/favicons?domain=anthropic.com&sz=128",
+  },
+];
