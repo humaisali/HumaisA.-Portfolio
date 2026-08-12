@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
 import {
     FaGithub,
-    FaTwitter,
+    FaWhatsapp,
     FaInstagram,
     FaLinkedin,
     FaEnvelope,
@@ -21,7 +21,7 @@ const defaultItems = [
     { letter: "O", icon: <FaLinkedin />, label: "LinkedIn", href: personalInfo.linkedin },
     { letter: "N", icon: <SiLeetcode />, label: "LeetCode", href: personalInfo.leetcode },
     { letter: "T", icon: <FaInstagram />, label: "Instagram", href: "https://www.instagram.com/localhost.5173/" },
-    { letter: "A", icon: <FaTwitter />, label: "Twitter", href: "https://twitter.com/i_humais" },
+    { letter: "A", icon: <FaWhatsapp />, label: "WhatsApp", href: personalInfo.whatsapp || "#" },
     { letter: "C", icon: <FaEnvelope />, label: "Email", href: `mailto:${personalInfo.email}` },
     { letter: "T", icon: <FaDiscord />, label: "Discord", href: "https://discord.com/users/humais_ali" },
 ];
@@ -44,7 +44,7 @@ const SocialFlipNode = ({
     return (
         <Wrapper
             {...wrapperProps}
-            className={cn("relative h-8 w-8 sm:h-10 sm:w-10 cursor-pointer flex-shrink-0", itemClassName)}
+            className={cn("relative h-8 w-8 sm:h-10 sm:w-10 cursor-pointer flex-shrink-0", isHovered && tooltipIndex === index ? "z-[100]" : "z-10", itemClassName)}
             style={{ perspective: "1000px" }}
             onMouseEnter={() => setTooltipIndex(index)}
             onMouseLeave={() => setTooltipIndex(null)}
@@ -133,7 +133,7 @@ export default function SocialFlipButton({
     return (
         <div className={cn("flex items-center justify-center gap-2 sm:gap-4 p-2 sm:p-4 w-full", className)}>
             <div
-                className="group relative flex items-center justify-center gap-1 sm:gap-2 rounded-2xl p-2 sm:p-4 shadow-2xl max-w-full overflow-hidden"
+                className="group relative flex items-center justify-center gap-1 sm:gap-2 rounded-2xl p-2 sm:p-4 shadow-2xl max-w-full"
                 style={{
                     backgroundColor: "#101010",
                     border: "1px solid rgba(10, 132, 255, 0.2)",
