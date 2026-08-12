@@ -142,13 +142,10 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="lg:col-span-3"
+            className="lg:col-span-3 h-full"
           >
-            <div className="relative group h-full">
-              {/* Ambient Glow */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-[#0A84FF]/20 to-[#00D4FF]/20 rounded-2xl blur-xl opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200" />
-              
-              <div className="relative h-full glass rounded-2xl p-6 sm:p-10">
+            <div className="relative h-full flex flex-col glass rounded-2xl border border-[#30363D] overflow-hidden transition-all duration-500 hover:border-[#0A84FF]/30 hover:shadow-[0_0_30px_rgba(10,132,255,0.15)] bg-[#050709]">
+              <div className="flex-1 p-6 sm:p-10 bg-[#0d1117] relative z-10">
                 <form onSubmit={handleSubmit} className="flex flex-col h-full gap-8">
                   <div className="grid sm:grid-cols-2 gap-8">
                     {/* Name Input */}
@@ -241,7 +238,7 @@ export default function Contact() {
                     disabled={status === "sending" || status === "success"}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative overflow-hidden w-full sm:w-auto self-end flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-[#0A84FF] to-[#00D4FF] hover:opacity-90 disabled:opacity-80 transition-all duration-300 shadow-[0_0_20px_rgba(10,132,255,0.4)] mt-auto"
+                    className="relative overflow-hidden w-full sm:w-auto self-end flex items-center justify-center gap-3 px-8 py-3.5 rounded-xl font-semibold text-white bg-[#0A84FF] border border-transparent hover:bg-[#050709] hover:border-[#0A84FF] hover:shadow-[0_0_20px_rgba(10,132,255,0.4)] disabled:opacity-80 transition-all duration-300 mt-auto"
                   >
                     <AnimatePresence mode="wait">
                       {status === "sending" ? (

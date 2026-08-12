@@ -101,7 +101,7 @@ export default function ExpandableBentoGrid({ items }) {
                                         href={active.ctaLink || "#"}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="px-6 py-2.5 text-sm rounded-lg font-bold bg-[#0A84FF] hover:bg-[#00D4FF] transition-colors text-white whitespace-nowrap"
+                                        className="px-6 py-2.5 text-sm rounded-lg font-bold text-white bg-[#0A84FF] border border-transparent hover:bg-[#050709] hover:border-[#0A84FF] hover:shadow-[0_0_20px_rgba(10,132,255,0.4)] transition-all duration-300 whitespace-nowrap"
                                     >
                                         Visit
                                     </motion.a>
