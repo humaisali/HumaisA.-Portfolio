@@ -14,6 +14,7 @@ export const personalInfo = {
   github: "https://github.com/humaisali",
   linkedin: "https://www.linkedin.com/in/humaisaliskytechdeveloper",
   leetcode: "https://leetcode.com/u/Humais_Ali/",
+  whatsapp: "https://wa.me/923000000000", // Update this with your actual phone number (include country code)
 };
 
 export const stats = [
