@@ -30,12 +30,14 @@ A production-grade personal portfolio built from scratch as a full-stack applica
 | **Stats Strip** | Animated counters between Hero and About |
 | **Skills Section** | Animated progress bars grouped by category |
 | **Experience Timeline** | Alternating left-right timeline with glassmorphism cards |
-| **Projects Grid** | 3D tilt cards with filter tabs and live/GitHub links |
+| **Certifications** | Dedicated section showcasing professional certificates and achievements |
+| **Projects Grid** | 3D tilt cards with filter tabs, live/GitHub links, and an expandable bento grid |
 | **Contact Form** | Form submissions saved directly to MongoDB via Express API |
 | **AI Chatbot** | Portfolio-context-aware assistant powered by Gemini AI |
 | **Admin Dashboard** | Full CRUD panel to manage projects, skills, experience, and messages |
 | **JWT Authentication** | Secure admin login with token-based auth |
 | **Particle Background** | Interactive canvas particles that react to mouse movement |
+| **Custom Cursor & UI** | Custom interactive cursor and rich animated components (MorphText, StaggerText) |
 | **Fully Responsive** | Mobile-first design across all screen sizes |
 
 ---
@@ -86,12 +88,20 @@ humais-portfolio/
 │   │   ├── About.jsx
 │   │   ├── Skills.jsx
 │   │   ├── Experience.jsx
+│   │   ├── Certifications.jsx
 │   │   ├── Projects.jsx
 │   │   ├── StatsStrip.jsx
 │   │   ├── Contact.jsx
 │   │   ├── Footer.jsx
 │   │   ├── Particles.jsx          # Interactive canvas background
-│   │   └── PortfolioChatBot.jsx   # Gemini AI chatbot
+│   │   ├── PortfolioChatBot.jsx   # Gemini AI chatbot
+│   │   ├── Cursor.jsx             # Custom interactive cursor
+│   │   ├── CursorCard.jsx         # Card hover effects for cursor
+│   │   ├── ExpandableBentoGrid.jsx# Grid layout component
+│   │   ├── MorphText.jsx          # Text morphing animation
+│   │   ├── SocialFlipButton.jsx   # Animated social links
+│   │   ├── StaggerText.jsx        # Staggered text animation
+│   │   └── VengeanceButton.jsx    # Primary animated button
 │   ├── data/
 │   │   └── index.js               # Static portfolio content
 │   ├── App.jsx
