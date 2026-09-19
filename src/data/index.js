@@ -1,5 +1,3 @@
-import { image } from "framer-motion/client";
-
 export const personalInfo = {
   name: "Humais Ali",
   roles: ["MERN Stack Developer", "Machine Learning Intern", "AI Engineer", "Problem Solver"],
@@ -89,6 +87,13 @@ export const experience = [
 export const projects = [
   {
     title: "AI Career Coach",
+    slug: "ai-career-coach",
+    overview: "AI Career Coach brings a developer's GitHub profile, portfolio, and resume into one career review. It uses Gemini 2.5 Flash to turn those materials into recruiter-style insights, helping developers understand how their professional profile comes across.",
+    features: [
+      { title: "A complete profile review", description: "Considers GitHub profiles, portfolio work, and resumes as inputs for career insights." },
+      { title: "AI-powered feedback", description: "Uses Gemini 2.5 Flash to generate career-focused analysis from the supplied material." },
+      { title: "Resume analysis", description: "Includes PDF parsing to work with resume documents alongside web profiles." },
+    ],
     description: "Analyzes GitHub profiles, portfolios, and resumes - delivering honest recruiter-level career insights powered by Gemini 2.5 Flash.",
     techs: ["React", "Node.js", "Gemini AI", "Tailwind", "pdf-parse"],
     github: "https://github.com/humaisali/AI-Career-Coach",
@@ -100,6 +105,13 @@ export const projects = [
   },
   {
     title: "AI Study Assistant",
+    slug: "ai-study-assistant",
+    overview: "AI Study Assistant turns uploaded study material into a more interactive learning experience. Students can work from their own documents, get explanations and summaries, and reinforce what they have learned with AI-generated quizzes.",
+    features: [
+      { title: "Bring your own material", description: "Upload study documents in PDF, TXT, Markdown, or PowerPoint format." },
+      { title: "Understand the content", description: "Generate explanations and summaries from the uploaded study material." },
+      { title: "Practice with quizzes", description: "Use interactive, AI-generated quizzes to revisit concepts from the documents." },
+    ],
     description: "Upload study documents and get AI-generated explanations, summaries, and interactive quizzes. Supports PDF, TXT, MD & PPTX.",
     techs: ["React", "Node.js", "Gemini AI", "Multer", "pdf-parse"],
     github: "https://github.com/humaisali/AI-Study-Assitent",
@@ -111,6 +123,13 @@ export const projects = [
   },
   {
     title: "PostCraft - AI LinkedIn Post Generator",
+    slug: "postcraft",
+    overview: "PostCraft helps developers turn a short project description into a professional LinkedIn post. The full-stack application uses Gemini 2.5 Flash to generate post copy, alternative opening hooks, and hashtags for sharing their work.",
+    features: [
+      { title: "From project to post", description: "Start with a short project description and generate a professional LinkedIn post." },
+      { title: "Explore different hooks", description: "Generate opening variations to find a fitting introduction for the post." },
+      { title: "Relevant hashtags", description: "Produce hashtags alongside the generated post content." },
+    ],
     description: "Full-stack AI-powered app that generates professional LinkedIn posts, hook variations, and hashtags from a short project description. Built with Gemini 2.5 Flash.",
     techs: ["React", "Vite", "Tailwind CSS", "Node.js", "Express", "Gemini AI"],
     github: "",
@@ -122,6 +141,13 @@ export const projects = [
   },
   {
     title: "CodeSage",
+    slug: "codesage",
+    overview: "CodeSage is an AI-assisted code exploration tool. A pasted code snippet becomes the starting point for step-by-step explanations, bug analysis, and optimization feedback, combining a React interface with a Node.js and Express backend and Gemini AI.",
+    features: [
+      { title: "Step-by-step explanations", description: "Break down a pasted code snippet to understand what it does." },
+      { title: "Bug detection", description: "Review potential bugs with severity ratings to help prioritize attention." },
+      { title: "Optimization analysis", description: "Explore AI-generated feedback on opportunities to improve the code." },
+    ],
     description: "Paste any code snippet and instantly get step-by-step explanations, bug detection with severity ratings, and optimization analysis.",
     techs: ["React", "Tailwind","Node.js", "Gemini AI", "Express"],
     github: "https://github.com/humaisali/CodeSage-AI-Code-Explainer",
@@ -133,6 +159,13 @@ export const projects = [
   },
   {
     title: "GitHub DevFinder",
+    slug: "github-devfinder",
+    overview: "GitHub DevFinder brings developer profile information into a visual analytics dashboard. Search by GitHub username to explore language usage, stars, contribution patterns, and activity through a React interface backed by the GitHub API.",
+    features: [
+      { title: "Search by username", description: "Look up a GitHub user to explore their developer profile." },
+      { title: "Visual profile analytics", description: "View language charts and star information using a dashboard built with Recharts." },
+      { title: "Contribution activity", description: "Explore a contribution heatmap and activity alongside the profile analytics." },
+    ],
     description: "Search any GitHub username and view a full analytics dashboard with language charts, stars, contribution heatmap, and activity.",
     techs: ["React", "Vite", "Tailwind", "Recharts", "GitHub API"],
     github: "https://github.com/humaisali/GitHub-DevFinder",
@@ -144,6 +177,13 @@ export const projects = [
   },
   {
     title: "Fida Hussain Portfolio",
+    slug: "fida-hussain-portfolio",
+    overview: "A personal portfolio website built for a client through SkyTech Developers. The project brings together React and Tailwind CSS in a responsive presentation, with Framer Motion and EmailJS included in its technology stack.",
+    features: [
+      { title: "Personal presentation", description: "A dedicated portfolio website built around the client's professional identity." },
+      { title: "Responsive layout", description: "A presentation designed to adapt across mobile and desktop screens." },
+      { title: "Modern frontend stack", description: "Built with React, Vite, and Tailwind CSS, with Framer Motion for animation." },
+    ],
     description: "Clean, responsive personal portfolio website built for a client under SkyTech Developers using React and Tailwind CSS.",
     techs: ["React", "Vite", "Tailwind","framer-motion","emailjs-com"],
     github: "https://github.com/humaisali/Fida-Hussain-Portfolio",

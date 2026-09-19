@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://engineerhumais.vercel.app/</loc>
-    <lastmod>2024-05-18T00:00:00+00:00</lastmod>
+    <loc>https://humaissoftneer.vercel.app/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://humaissoftneer.vercel.app/projects</loc></url>
+  <url><loc>https://humaissoftneer.vercel.app/projects/ai-career-coach</loc></url>
+  <url><loc>https://humaissoftneer.vercel.app/projects/ai-study-assistant</loc></url>
+  <url><loc>https://humaissoftneer.vercel.app/projects/postcraft</loc></url>
+  <url><loc>https://humaissoftneer.vercel.app/projects/codesage</loc></url>
+  <url><loc>https://humaissoftneer.vercel.app/projects/github-devfinder</loc></url>
+  <url><loc>https://humaissoftneer.vercel.app/projects/fida-hussain-portfolio</loc></url>
 </urlset>

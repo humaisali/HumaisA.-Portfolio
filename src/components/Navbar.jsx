@@ -1,25 +1,26 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { User, Zap, Briefcase, Layout, Mail, Menu, X, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import VengeanceButton from "./VengeanceButton";
 
 const NavLink = ({ href, icon: Icon, label, isActive, onClick }) => (
-  <a
-    href={`#${href}`}
-    onClick={(e) => {
-      e.preventDefault();
-      onClick();
-    }}
+  <Link
+    to={href === "projects" ? "/projects" : `/#${href}`}
+    onClick={onClick}
+    aria-current={isActive ? "page" : undefined}
     className={`group flex items-center gap-1.5 text-sm font-medium transition-colors whitespace-nowrap ${isActive ? "text-[#0A84FF]" : "text-[#8B949E] hover:text-white"}`}
   >
     <Icon className="w-4 h-4 opacity-70 group-hover:opacity-100 transition-opacity" />
     <span>{label}</span>
-  </a>
+  </Link>
 );
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [active, setActive] = useState("");
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const items = [
     { label: "Home", href: "hero", icon: Home },
@@ -31,6 +32,7 @@ export default function Navbar() {
   ];
 
   useEffect(() => {
+    if (pathname !== "/") return;
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -44,10 +46,20 @@ export default function Navbar() {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
+
+  const isItemActive = (id) => pathname.startsWith("/projects") ? id === "projects" : pathname === "/" && (active === id || (active === "" && id === "hero"));
 
   function scrollToSection(id) {
     setIsMobileMenuOpen(false);
+    if (pathname !== "/") {
+      navigate(`/#${id}`);
+      return;
+    }
     setTimeout(() => {
       if (id === "hero") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -115,24 +127,26 @@ export default function Navbar() {
               </div>
 
               {/* Desktop Center Nav Links */}
-              <nav className="hidden md:flex gap-4 lg:gap-8 items-center justify-center shrink-0 mb-1">
+              <nav className="hidden xl:flex gap-5 items-center justify-center shrink-0 mb-1">
                 {items.map(item => (
-                  <NavLink key={item.label} {...item} isActive={active === item.href || (active === "" && item.href === "hero")} onClick={() => scrollToSection(item.href)} />
+                  <NavLink key={item.label} {...item} isActive={isItemActive(item.href)} onClick={() => { setIsMobileMenuOpen(false); if (pathname === "/" && item.href !== "projects") scrollToSection(item.href); }} />
                 ))}
               </nav>
 
               {/* Desktop Right Actions & Mobile Menu */}
               <div className="flex items-center gap-4 shrink-0 mb-1">
-                <div className="hidden md:block">
+                <div className="hidden xl:block">
                   <VengeanceButton onClick={() => scrollToSection("contact")} size="sm">
                     Hire Me
                   </VengeanceButton>
                 </div>
                 {/* Mobile Menu Button */}
                 <button
-                  className="md:hidden p-1 text-[#8B949E] hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+                  className="xl:hidden p-2 text-[#8B949E] hover:text-white transition-colors bg-transparent border-none cursor-pointer"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   aria-label="Toggle menu"
+                  aria-expanded={isMobileMenuOpen}
+                  aria-controls="mobile-navigation"
                 >
                   {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                 </button>
@@ -172,25 +186,24 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 top-[64px] z-[90] bg-[#050505]/98 backdrop-blur-xl p-6 md:hidden h-[calc(100vh-64px)] overflow-y-auto"
+            id="mobile-navigation"
+            className="fixed inset-0 top-[64px] z-[90] bg-[#050505]/95 backdrop-blur-xl p-6 xl:hidden h-[calc(100vh-64px)] overflow-y-auto"
           >
             <nav className="flex flex-col gap-3">
               {/* Combine all items */}
               {items.map(item => {
-                const isActive = active === item.href || (active === "" && item.href === "hero");
+                const isActive = isItemActive(item.href);
                 return (
-                  <a
+                  <Link
                     key={item.label}
-                    href={`#${item.href}`}
+                    to={item.href === "projects" ? "/projects" : `/#${item.href}`}
+                    aria-current={isActive ? "page" : undefined}
                     className={`flex items-center gap-4 p-4 rounded-xl transition-colors ${isActive ? "bg-[#0A84FF]/10 text-[#0A84FF] border border-[#0A84FF]/20" : "text-[#8B949E] hover:text-white hover:bg-[#21262D] border border-transparent"}`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollToSection(item.href);
-                    }}
+                    onClick={() => { setIsMobileMenuOpen(false); if (pathname === "/" && item.href !== "projects") scrollToSection(item.href); }}
                   >
                     <item.icon className="w-6 h-6 opacity-80" />
                     <span className="font-semibold text-lg">{item.label}</span>
-                  </a>
+                  </Link>
                 );
               })}
               

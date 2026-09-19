@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 /**
  * VengeanceButton — faithful adaptation of VengenceUI "Generate Button".
@@ -20,6 +21,7 @@ export default function VengeanceButton({
   children = "Button",
   hue = 210,
   href,
+  to,
   download,
   target,
   rel,
@@ -271,11 +273,12 @@ export default function VengeanceButton({
   );
 
   // Render as <a> if href is provided
-  if (href) {
+  if (href || to) {
+    const Component = to ? Link : "a";
     return (
       <div className={"relative inline-block" + fullWidthClass}>
-        <a
-          href={href}
+        <Component
+          {...(to ? { to } : { href })}
           download={download || undefined}
           target={target}
           rel={rel}
@@ -290,7 +293,7 @@ export default function VengeanceButton({
           style={fullWidth ? { width: "100%" } : undefined}
         >
           {content}
-        </a>
+        </Component>
       </div>
     );
   }

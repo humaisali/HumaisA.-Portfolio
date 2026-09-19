@@ -20,6 +20,7 @@ export default function Hero() {
       id="hero"
       className="relative flex flex-col items-center justify-center min-h-screen pt-24 pb-16 overflow-hidden"
     >
+      <h1 className="sr-only">{personalInfo.name} — Software Engineer &amp; AI Developer</h1>
       {/* Contained background blobs — pointer-events none, won't cause scroll */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0A84FF] rounded-full opacity-[0.04] blur-[120px]" />
@@ -121,7 +122,7 @@ export default function Hero() {
             className="flex flex-row justify-start gap-3"
           >
             <VengeanceButton
-              href="#projects"
+              to="/projects"
               variant="primary"
             >
               View Projects
@@ -252,7 +253,7 @@ export default function Hero() {
           className="flex flex-row flex-wrap items-center justify-center gap-3 mb-10"
         >
           <VengeanceButton
-            href="#projects"
+            to="/projects"
             variant="primary"
           >
             View Projects

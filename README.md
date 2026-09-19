@@ -278,3 +278,14 @@ After first login, click **Seed** in each section to populate the database with 
 <div align="center">
 If you found this useful, consider giving it a star.
 </div>
+
+## Public project pages
+
+- `/` shows only entries with `featured: true` in the homepage project section.
+- `/projects` lists every project, with category and text filters saved in the URL.
+- `/projects/:slug` shows a project's screenshot, overview, features, technologies, and available external links.
+- Invalid project links display a not-found page with a route back to the collection.
+
+Public project content lives in `src/data/index.js`. Each project needs a unique, stable `slug`, `overview`, and `features` array (`title` and `description`), alongside its existing card fields. Keep slugs stable so shared links continue working, and add new project URLs to `public/sitemap.xml`. The public pages currently use this static data, independently of the admin database.
+
+The shared public layout shows the three-second loader on a fresh visit. Internal navigation between the portfolio, collection, and detail pages does not restart it. The existing Vercel SPA rewrite supports direct project URLs.

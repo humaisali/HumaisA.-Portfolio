@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { FiGithub, FiLinkedin, FiMail, FiHeart, FiArrowUp, FiClock, FiFileText } from "react-icons/fi";
 import { SiLeetcode } from "react-icons/si";
 import { FaWhatsapp } from "react-icons/fa";
@@ -12,10 +13,10 @@ const socials = [
 ];
 
 const quickLinks = [
-  { label: "Home",       href: "#home" },
-  { label: "About Me",   href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects",   href: "#projects" },
+  { label: "Home",       href: "/#hero" },
+  { label: "About Me",   href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "All Projects", href: "/projects" },
 ];
 
 const resources = [
@@ -41,9 +42,9 @@ export default function Footer() {
 
       {/* Massive Watermark Text */}
       <div className="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none select-none flex justify-center translate-y-1/3 opacity-40">
-        <h1 className="text-[22vw] font-black text-white/[0.03] leading-none whitespace-nowrap">
+        <p aria-hidden="true" className="text-[22vw] font-black text-white/[0.03] leading-none whitespace-nowrap">
           HUMAIS
-        </h1>
+        </p>
       </div>
 
       <div className="px-4 sm:px-6 mx-auto max-w-7xl lg:px-12 relative z-10">
@@ -91,13 +92,13 @@ export default function Footer() {
             <ul className="flex flex-col gap-3 sm:gap-4">
               {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="relative group inline-block text-[#8B949E] hover:text-white transition-colors duration-300 text-[13px] sm:text-sm"
                   >
                     {link.label}
                     <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-[#0A84FF] to-[#00D4FF] group-hover:w-full transition-all duration-300 ease-out" />
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
