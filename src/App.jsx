@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthProvider } from "./admin/context/AuthContext";
@@ -15,8 +16,20 @@ import Projects  from "./components/Projects";
 import Contact   from "./components/Contact";
 import Footer    from "./components/Footer";
 import PortfolioChatBot from "./components/PortfolioChatBot";
+import KineticTextLoader from "./components/KineticTextLoader";
+
+const PORTFOLIO_LOADING_MS = 3000;
 
 function Portfolio() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setLoading(false), PORTFOLIO_LOADING_MS);
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  if (loading) return <KineticTextLoader />;
+
   return (
     <div className="noise bg-[#050709] min-h-screen relative overflow-x-hidden">
       <Particles />
