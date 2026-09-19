@@ -4,9 +4,9 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Kill ALL horizontal overflow at the root — this is the main fix */
+/* Clip horizontal overflow without creating a scroll container that breaks sticky sidebars. */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
 }
 

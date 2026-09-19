@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Outlet, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AuthProvider } from "./admin/context/AuthContext";
@@ -16,11 +16,12 @@ import Footer from "./components/Footer";
 import PortfolioChatBot from "./components/PortfolioChatBot";
 import KineticTextLoader from "./components/KineticTextLoader";
 import AllProjects from "./pages/AllProjects";
-import ProjectDetails, { ProjectNotFound } from "./pages/ProjectDetails";
+import ProjectNotFound from "./pages/ProjectNotFound";
 import { projects } from "./data/index";
 import "./projects.css";
 
 const PORTFOLIO_LOADING_MS = 3000;
+const ProjectDetails = lazy(() => import("./pages/ProjectDetails"));
 
 function PublicRouteEffects() {
   const { pathname, hash } = useLocation();
@@ -60,12 +61,14 @@ function PublicLayout() {
   }, []);
   if (loading) return <KineticTextLoader />;
   return (
-    <div className="noise bg-[#050709] min-h-screen relative overflow-x-hidden">
-      <PublicRouteEffects />
+    <div className="noise bg-[#050709] min-h-screen relative overflow-x-clip">
       <Particles />
       <div className="relative z-10">
         <Navbar />
-        <Outlet />
+        <Suspense fallback={<div role="status" className="min-h-screen px-6 pt-40 text-center text-[#70bdff]">Loading project details…</div>}>
+          <PublicRouteEffects />
+          <Outlet />
+        </Suspense>
         <Footer />
       </div>
       <PortfolioChatBot />

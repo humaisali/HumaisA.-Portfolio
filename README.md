@@ -289,3 +289,15 @@ If you found this useful, consider giving it a star.
 Public project content lives in `src/data/index.js`. Each project needs a unique, stable `slug`, `overview`, and `features` array (`title` and `description`), alongside its existing card fields. Keep slugs stable so shared links continue working, and add new project URLs to `public/sitemap.xml`. The public pages currently use this static data, independently of the admin database.
 
 The shared public layout shows the three-second loader on a fresh visit. Internal navigation between the portfolio, collection, and detail pages does not restart it. The existing Vercel SPA rewrite supports direct project URLs.
+
+### Editing the expanded case studies
+
+`src/data/projectCaseStudies.js` contains the detailed content, keyed by the same project slugs as `src/data/index.js`:
+
+- `role`, `duration`, `team`, `audience`: project summary.
+- `problem`, `goals`, `solution`, `journey`: product brief and user flow.
+- `architecture`, `decisions`, `challenges`: technical story and tradeoffs.
+- `metrics`, `lessons`, `roadmap`: outcomes, reflections, and future plans.
+- `process` and `gallery`: optional per-project overrides of the shared sample arrays at the bottom of the file. Gallery items accept `src`, `alt`, `caption`, and `description`; an empty `src` displays a labeled screenshot placeholder.
+
+All six expanded case studies initially use dummy content (`isPlaceholder: true`). This displays a sample-content notice and explicitly labels the example metrics as unmeasured. Replace the text, metrics, timeline, and gallery with actual information before setting `isPlaceholder: false`. Existing project overviews, feature descriptions, main screenshots, and links remain in `src/data/index.js`.
